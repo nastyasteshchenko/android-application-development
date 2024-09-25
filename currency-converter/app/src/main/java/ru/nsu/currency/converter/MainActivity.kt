@@ -5,11 +5,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.currency.converter.model.Currency
+import java.io.IOException
 
 class MainActivity : AppCompatActivity(), OnCurrencyClickListener {
 
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity(), OnCurrencyClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setCurrencyList()
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
@@ -46,32 +49,68 @@ class MainActivity : AppCompatActivity(), OnCurrencyClickListener {
             override fun afterTextChanged(s: Editable?) {
             }
         })
-
-        setCurrencyList()
     }
 
     override fun onConvertCurrency(currency: Currency) {
         currentCurrency = currency
-        selectedCurrency.text =
-            this.getString(R.string.selected_currency, currency.name, currency.charCode)
+        updateSelectCurrencyText()
+        val rubAmount = getEnteredRubAmount() ?: return
+        val convertedValue = convertToCurrentCurrency(rubAmount)
+        updateConversionResultText(convertedValue)
+    }
+
+    private fun updateConversionResultText(convertedValue: Double?) {
+        if (currentCurrency != null) {
+            conversionResult.text =
+                this.getString(
+                    R.string.conversion_result,
+                    convertedValue,
+                    currentCurrency!!.charCode
+                )
+        }
+    }
+
+    private fun getEnteredRubAmount(): Double? {
         val rubAmount = rubAmount.text.toString().toDoubleOrNull()
         if (rubAmount == null) {
             conversionResult.text = this.getString(R.string.conversion_error)
-            return
+            return null
         }
-        val convertedValue = currencyConverter.convertFromRubs(rubAmount, currency)
-        conversionResult.text =
-            this.getString(R.string.conversion_result, convertedValue, currency.charCode)
+        return rubAmount
+    }
+
+    private fun convertToCurrentCurrency(rubAmount: Double): Double? {
+        return currentCurrency?.let { currencyConverter.convertFromRubs(rubAmount, it) }
+    }
+
+    private fun updateSelectCurrencyText() {
+        if (currentCurrency != null) {
+            selectedCurrency.text =
+                this.getString(
+                    R.string.selected_currency,
+                    currentCurrency!!.name,
+                    currentCurrency!!.charCode
+                )
+        }
     }
 
     private fun setCurrencyList() {
         Thread {
-            val currency = currencyDataTaker.getCurrencyList()
-            runOnUiThread {
-                currencyAdapter = CurrencyAdapter(currency, this, this)
-                recyclerView.adapter = currencyAdapter
+            try {
+                val currency = currencyDataTaker.getCurrencyList()
+                runOnUiThread {
+                    currencyAdapter = CurrencyAdapter(currency, this, this)
+                    recyclerView.adapter = currencyAdapter
+                }
+            } catch (e: IOException) {
+                runOnUiThread {
+                    Toast.makeText(
+                        this,
+                        "Data acquisition error. Check your internet connection or restart the app",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }.start()
     }
-
 }

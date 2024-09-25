@@ -7,5 +7,4 @@ class CurrencyConverter {
     fun convertFromRubs(rubAmount: Double, currency: Currency): Double {
         return rubAmount / currency.value
     }
-
 }
