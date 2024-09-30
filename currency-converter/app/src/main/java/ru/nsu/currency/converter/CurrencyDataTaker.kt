@@ -31,7 +31,7 @@ class CurrencyDataTaker {
                 return currencyResponse.valute.values.map { currency -> currency.mapToDomainModel() }
                     .toList()
             }
-            return Collections.emptyList();
+            return Collections.emptyList()
         }
     }
 }

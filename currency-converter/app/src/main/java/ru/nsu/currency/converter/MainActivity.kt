@@ -28,11 +28,12 @@ class MainActivity : AppCompatActivity(), OnCurrencyClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setCurrencyList()
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        setCurrencyList()
 
         rubAmount = findViewById(R.id.rubAmount)
         selectedCurrency = findViewById(R.id.selectedCurrency)
