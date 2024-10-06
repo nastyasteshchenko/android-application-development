@@ -15,6 +15,7 @@ class ActivityC : AppCompatActivity() {
 
         toAButton.setOnClickListener {
             val intent = Intent(this, ActivityA::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }
