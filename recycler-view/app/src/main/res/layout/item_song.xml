@@ -1,20 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="328dp"
     android:layout_height="72dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rounded_background"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="12dp">>
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="@string/song_picture" />
+        app:roundedCornerRadius="8dp"/>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="184dp"
+        android:layout_height="44dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -36,14 +38,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:gravity="center">
 
         <ImageButton
             android:id="@+id/playButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:backgroundTint="#262E2F"
             android:contentDescription="@string/image_of_play_button"
             android:src="@drawable/ic_play" />
