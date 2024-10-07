@@ -5,7 +5,7 @@
     android:background="@drawable/rounded_background"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">>
+    android:padding="12dp">
 
     <LinearLayout
         android:layout_width="188dp"
@@ -17,15 +17,18 @@
             android:id="@+id/category"
             android:layout_width="188dp"
             android:layout_height="16dp"
-            android:text="Category"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/category"
             android:textColor="#91D2D5"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:textFontWeight="500"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="188dp"
             android:layout_height="24dp"
-            android:text="Title"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/title"
             android:textColor="#E2E2E2"
             android:textSize="16sp" />
 
@@ -33,7 +36,8 @@
             android:id="@+id/description"
             android:layout_width="188dp"
             android:layout_height="20dp"
-            android:text="Description"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/description"
             android:textColor="#C3C7C7"
             android:textSize="14sp" />
     </LinearLayout>
