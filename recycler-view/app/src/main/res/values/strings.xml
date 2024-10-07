@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">recycler-view</string>
+    <string name="song_picture">Song picture</string>
+    <string name="image_of_play_button">Image of play button</string>
+    <string name="author">Author</string>
+    <string name="song_title">Song Title</string>
 </resources>
