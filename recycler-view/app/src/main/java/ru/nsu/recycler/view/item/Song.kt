@@ -4,6 +4,7 @@ data class Song(
     override val id: Int,
     val title: String,
     val artist: String,
+    val description: String,
     val imageUrl: String
 ) :
     Item() {
@@ -20,5 +21,6 @@ data class Song(
                 && this.title == other.title
                 && this.artist == other.artist
                 && this.imageUrl == other.imageUrl
+                && this.description == other.description
     }
 }

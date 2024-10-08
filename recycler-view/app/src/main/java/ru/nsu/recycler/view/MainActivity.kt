@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         Fresco.initialize(this)
 
-        val adapter = PlayerAdapter()
+        val adapter = PlayerAdapter(this)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)

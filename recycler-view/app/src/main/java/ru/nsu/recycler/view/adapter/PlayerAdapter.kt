@@ -1,17 +1,22 @@
 package ru.nsu.recycler.view.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.recycler.view.PlayerDiffCallback
 import ru.nsu.recycler.view.R
+import ru.nsu.recycler.view.SongDetailActivity
 import ru.nsu.recycler.view.item.Banner
 import ru.nsu.recycler.view.item.Item
 import ru.nsu.recycler.view.item.ItemType
 import ru.nsu.recycler.view.item.Song
 
-class PlayerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+class PlayerAdapter(private val context: Context) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items = ArrayList<Item>()
 
@@ -40,7 +45,19 @@ class PlayerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is SongViewHolder -> holder.bind(items[position] as Song)
+            is SongViewHolder -> {
+                val song = items[position] as Song
+                holder.bind(song)
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(context, SongDetailActivity::class.java)
+                    intent.putExtra("title", song.title)
+                    intent.putExtra("imageUrl", song.imageUrl)
+                    intent.putExtra("author", song.artist)
+                    intent.putExtra("description", song.description)
+                    context.startActivity(intent)
+                }
+            }
+
             is BannerViewHolder -> holder.bind(items[position] as Banner)
         }
     }

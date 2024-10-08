@@ -14,6 +14,11 @@ class Test {
         private const val BANNER_IMAGE_URL = "https://tinyurl.com/3zudr9hk"
         private const val SONG_TITLE = "No Hay Ley"
         private const val SONG_AUTHOR = "Kali Uchis"
+        private const val SONG_DESCRIPTION =
+            "\"NO HAY LEY\" is a song by Kali Uchis released on September 2, 2022, as a " +
+                    "stand-alone single. A remix titled \"No Hay Ley Parte 2\" featuring Rauw " +
+                    "Alejandro was released on Uchis' fourth studio album ORQUÍDEAS appearing as " +
+                    "the twelfth track on the album."
         private const val BANNER_CATEGORY = "Technology"
         private const val BANNER_TITLE = "Twitter has a new boss"
         private const val BANNER_DESCRIPTION = "Big changes are coming"
@@ -27,6 +32,7 @@ class Test {
                 it,
                 SONG_TITLE,
                 SONG_AUTHOR,
+                SONG_DESCRIPTION,
                 SONG_IMAGE_URL
             )
         }
