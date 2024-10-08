@@ -8,6 +8,7 @@ data class Banner(
     val imageUrl: String
 ) :
     Item() {
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
