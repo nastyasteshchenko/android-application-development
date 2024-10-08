@@ -55,7 +55,7 @@
         android:justificationMode="inter_word"
         android:layout_height="364dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="@string/details"
+        android:text="@string/description"
         android:lineSpacingExtra="4dp"
         android:textColor="#E2E2E2"
         android:textSize="18sp"
