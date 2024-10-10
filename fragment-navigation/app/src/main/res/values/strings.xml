@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">fragment-navigation</string>
+    <string name="fragment_a_header">A</string>
+    <string name="fragment_b_header">B</string>
+    <string name="fragment_c_header">C</string>
+    <string name="to_b_button_text">To B</string>
+    <string name="to_c_button_text">To C</string>
+    <string name="to_a_button_text">To A</string>
+</resources>
