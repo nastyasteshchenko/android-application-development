@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/rounded_background"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/songImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        app:roundedCornerRadius="8dp" />
+
+    <LinearLayout
+        android:layout_width="184dp"
+        android:layout_height="44dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/songTitle"
+            android:layout_width="184dp"
+            android:layout_height="24dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/song_title"
+            android:textColor="#E2E2E2"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/songAuthor"
+            android:layout_width="184dp"
+            android:layout_height="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/author"
+            android:textColor="#C3C7C7"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/playButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:backgroundTint="#262E2F"
+            android:contentDescription="@string/image_of_play_button"
+            android:src="@drawable/ic_play" />
+    </LinearLayout>
+
+</LinearLayout>
