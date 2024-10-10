@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.recycler.view.PlayerDiffCallback
 import ru.nsu.recycler.view.R
 import ru.nsu.recycler.view.SongDetailActivity
-import ru.nsu.recycler.view.item.Banner
 import ru.nsu.recycler.view.item.Item
 import ru.nsu.recycler.view.item.ItemType
-import ru.nsu.recycler.view.item.Song
-
 
 class PlayerAdapter(private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -22,19 +19,19 @@ class PlayerAdapter(private val context: Context) :
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is Song -> ItemType.SONG.ordinal
-            is Banner -> ItemType.BANNER.ordinal
+            is Item.Song -> ItemType.SONG.typeId
+            is Item.Banner -> ItemType.BANNER.typeId
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ItemType.SONG.ordinal -> SongViewHolder(
+            ItemType.SONG.typeId -> SongViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_song, parent, false)
             )
 
-            ItemType.BANNER.ordinal -> BannerViewHolder(
+            ItemType.BANNER.typeId -> BannerViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_banner, parent, false)
             )
@@ -46,7 +43,7 @@ class PlayerAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SongViewHolder -> {
-                val song = items[position] as Song
+                val song = items[position] as Item.Song
                 holder.bind(song)
                 holder.itemView.setOnClickListener {
                     val intent = Intent(context, SongDetailActivity::class.java)
@@ -58,7 +55,7 @@ class PlayerAdapter(private val context: Context) :
                 }
             }
 
-            is BannerViewHolder -> holder.bind(items[position] as Banner)
+            is BannerViewHolder -> holder.bind(items[position] as Item.Banner)
         }
     }
 

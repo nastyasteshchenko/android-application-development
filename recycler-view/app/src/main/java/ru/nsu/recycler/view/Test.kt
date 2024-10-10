@@ -3,9 +3,7 @@ package ru.nsu.recycler.view
 import android.os.Handler
 import android.os.Looper
 import ru.nsu.recycler.view.adapter.PlayerAdapter
-import ru.nsu.recycler.view.item.Banner
 import ru.nsu.recycler.view.item.Item
-import ru.nsu.recycler.view.item.Song
 
 class Test {
 
@@ -28,7 +26,7 @@ class Test {
 
     fun startTest(playerAdapter: PlayerAdapter) {
         val initialSongs = (1..15).map {
-            Song(
+            Item.Song(
                 it,
                 SONG_TITLE,
                 SONG_AUTHOR,
@@ -40,14 +38,14 @@ class Test {
         playerAdapter.updateData(items)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val banner1 = Banner(
+            val banner1 = Item.Banner(
                 16,
                 BANNER_CATEGORY,
                 BANNER_TITLE,
                 BANNER_DESCRIPTION,
                 BANNER_IMAGE_URL
             )
-            val banner2 = Banner(
+            val banner2 = Item.Banner(
                 17,
                 BANNER_CATEGORY,
                 BANNER_TITLE,
