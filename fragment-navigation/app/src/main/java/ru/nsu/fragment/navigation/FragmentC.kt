@@ -20,10 +20,7 @@ class FragmentC : Fragment() {
         val toAButton: Button = view.findViewById(R.id.toAButton)
         toAButton.setOnClickListener {
             requireActivity().supportFragmentManager
-                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FragmentA())
-                .commit()
+                .popBackStack(Tag.FRAGMENT_A.tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         return view

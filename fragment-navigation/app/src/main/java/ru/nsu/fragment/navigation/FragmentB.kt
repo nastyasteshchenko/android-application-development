@@ -16,10 +16,14 @@ class FragmentB : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_b, container, false)
 
+        val fragmentC =
+            requireActivity().supportFragmentManager.findFragmentByTag(Tag.FRAGMENT_C.tag)!!
+
         val toCButton: Button = view.findViewById(R.id.toCButton)
         toCButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FragmentC())
+                .hide(this)
+                .show(fragmentC)
                 .addToBackStack(null)
                 .commit()
         }
