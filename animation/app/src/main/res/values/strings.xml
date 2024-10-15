@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">animation</string>
+    <string name="enter_something">Enter something</string>
+    <string name="submit">Submit</string>
 </resources>
