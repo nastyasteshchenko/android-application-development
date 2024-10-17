@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, fragmentA)
-            .add(R.id.fragment_container, fragmentB, Tag.FRAGMENT_B.tag )
-            .add(R.id.fragment_container, fragmentC, Tag.FRAGMENT_C.tag)
+            .add(R.id.fragment_container, fragmentB, FragmentB.TAG)
+            .add(R.id.fragment_container, fragmentC, FragmentC.TAG)
             .hide(fragmentB)
             .hide(fragmentC)
             .commit()

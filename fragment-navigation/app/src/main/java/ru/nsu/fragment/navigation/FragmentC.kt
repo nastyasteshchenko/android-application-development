@@ -10,19 +10,23 @@ import androidx.fragment.app.FragmentManager
 
 class FragmentC : Fragment() {
 
+    companion object {
+        const val TAG: String = "C"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_c, container, false)
+        return inflater.inflate(R.layout.fragment_c, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val toAButton: Button = view.findViewById(R.id.toAButton)
         toAButton.setOnClickListener {
             requireActivity().supportFragmentManager
-                .popBackStack(Tag.FRAGMENT_A.tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                .popBackStack(FragmentA.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
-
-        return view
     }
 }
