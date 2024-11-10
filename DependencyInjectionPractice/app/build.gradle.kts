@@ -37,20 +37,19 @@ android {
 	}
 }
 
-val daggerVersion = "2.46.1"
-val dagger = "com.google.dagger:dagger:$daggerVersion"
-val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 dependencies {
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
 	implementation(libs.material)
 	testImplementation(libs.junit)
 	implementation(libs.androidx.activity.ktx)
+	implementation(libs.androidx.fragment.ktx)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
 
-	kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.0")
-	implementation(dagger)
-	kapt(daggerCompiler)
+	implementation(libs.dagger.v2461)
+	implementation(libs.dagger.android)
+	kapt(libs.dagger.compiler.v2461)
+	kapt(libs.kotlinx.metadata.jvm)
 
 }
