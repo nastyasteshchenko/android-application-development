@@ -1,8 +1,8 @@
-package ru.nsu.dependencyinjectionpractice
+package ru.nsu.dependencyinjectionpractice.di.component
 
 import dagger.Component
-import ru.nsu.dependencyinjectionpractice.data.module.DataModule
-import ru.nsu.dependencyinjectionpractice.domain.module.DomainModule
+import ru.nsu.dependencyinjectionpractice.di.module.DataModule
+import ru.nsu.dependencyinjectionpractice.di.module.DomainModule
 import ru.nsu.dependencyinjectionpractice.ui.MainActivity
 import javax.inject.Singleton
 

@@ -1,6 +1,8 @@
 package ru.nsu.dependencyinjectionpractice
 
 import android.app.Application
+import ru.nsu.dependencyinjectionpractice.di.component.AppComponent
+import ru.nsu.dependencyinjectionpractice.di.component.DaggerAppComponent
 
 class HomeworkApplication : Application() {
 

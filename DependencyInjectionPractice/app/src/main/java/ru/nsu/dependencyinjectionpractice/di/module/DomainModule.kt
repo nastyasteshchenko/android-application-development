@@ -1,4 +1,4 @@
-package ru.nsu.dependencyinjectionpractice.domain.module
+package ru.nsu.dependencyinjectionpractice.di.module
 
 import dagger.Binds
 import dagger.Module

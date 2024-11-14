@@ -1,8 +1,8 @@
 package ru.nsu.dependencyinjectionpractice.data.repository
 
 import ru.nsu.dependencyinjectionpractice.data.datasource.SampleStringDataSource
-import ru.nsu.dependencyinjectionpractice.data.module.Local
-import ru.nsu.dependencyinjectionpractice.data.module.Remote
+import ru.nsu.dependencyinjectionpractice.di.module.Local
+import ru.nsu.dependencyinjectionpractice.di.module.Remote
 import ru.nsu.dependencyinjectionpractice.domain.repository.SampleStringRepository
 import javax.inject.Inject
 

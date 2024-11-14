@@ -1,4 +1,4 @@
-package ru.nsu.dependencyinjectionpractice.data.module
+package ru.nsu.dependencyinjectionpractice.di.module
 
 import dagger.Binds
 import dagger.Module
