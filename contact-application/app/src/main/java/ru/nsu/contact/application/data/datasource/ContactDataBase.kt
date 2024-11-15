@@ -2,9 +2,9 @@ package ru.nsu.contact.application.data.datasource
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.nsu.contact.application.domain.model.Contact
+import ru.nsu.contact.application.data.entity.ContactEntity
 
-@Database(entities = [Contact::class], version = 1)
+@Database(entities = [ContactEntity::class], version = 1)
 abstract class ContactDataBase : RoomDatabase() {
     abstract fun contactDao(): ContactDao
 

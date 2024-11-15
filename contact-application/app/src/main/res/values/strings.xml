@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">contact-application</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
 </resources>

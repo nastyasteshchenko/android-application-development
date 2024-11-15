@@ -8,14 +8,14 @@
     android:padding="12dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/songImage"
+        android:id="@+id/contactImage"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         app:roundedCornerRadius="8dp" />
 
     <LinearLayout
-        android:layout_width="184dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -25,17 +25,17 @@
             android:layout_width="184dp"
             android:layout_height="24dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Name"
-            android:textColor="#E2E2E2"
+            android:text="@string/name"
+            android:textColor="#87785C"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/contactNumber"
+            android:id="@+id/contactPhoneNumber"
             android:layout_width="184dp"
             android:layout_height="20dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Number"
-            android:textColor="#C3C7C7"
+            android:text="@string/number"
+            android:textColor="#453D30"
             android:textSize="14sp" />
     </LinearLayout>
 
