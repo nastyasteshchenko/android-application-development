@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ui.MainActivity"
-    android:background="#e6ba90">
+    android:background="#D6DAC8">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/contacts"
-        android:textColor="#453D30"
+        android:textColor="#798784"
         android:textAlignment="center"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="618dp"
+        android:layout_width="408dp"
+        android:layout_height="651dp"
         android:clipChildren="false"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/addContactButton"
@@ -32,17 +32,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.255" />
 
     <Button
         android:id="@+id/addContactButton"
-        android:fontFamily="@font/roboto_medium"
         android:layout_width="235dp"
         android:layout_height="70dp"
-        android:backgroundTint="#ecd6ac"
-        android:textColor="#87785C"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="56dp"
+        android:backgroundTint="#EFBC9B"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/add_contact"
+        android:textColor="#798784"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

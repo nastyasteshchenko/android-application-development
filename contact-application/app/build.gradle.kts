@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.nsu.contact.application"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    implementation("ru.tinkoff.decoro:decoro:1.1.1")
+    
     implementation(libs.dagger.v2461)
     implementation(libs.dagger.android)
     kapt(libs.dagger.compiler.v2461)

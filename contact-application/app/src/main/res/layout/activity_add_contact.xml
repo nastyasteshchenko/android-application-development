@@ -1,12 +1,11 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D6DAC8"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#e6ba90">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textView"
@@ -15,8 +14,8 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/add_contact"
-        android:textColor="#453D30"
         android:textAlignment="center"
+        android:textColor="#798784"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,21 +36,36 @@
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="340dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="48dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_text_fields_background"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_medium"
         android:hint="@string/name"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textColorHint="#9CAFAA"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addContactImage" />
+        app:layout_constraintTop_toBottomOf="@+id/addContactImage"
+        app:layout_constraintVertical_bias="0.167" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="phone"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/custom_text_fields_background"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="Phone number"
+        android:padding="16dp"
+        android:textColorHint="#9CAFAA"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
@@ -59,10 +73,12 @@
         android:id="@+id/button_save"
         android:layout_width="235dp"
         android:layout_height="70dp"
-        android:layout_marginTop="128dp"
-        android:backgroundTint="#ecd6ac"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#EFBC9B"
+        android:drawableLeft="@drawable/save"
         android:text="@string/save"
-        android:textColor="#87785C"
+        android:textSize="16sp"
+        android:textColor="#798784"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />

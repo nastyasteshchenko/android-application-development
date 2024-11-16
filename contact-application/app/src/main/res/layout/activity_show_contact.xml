@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D6DAC8"
-    android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
@@ -13,7 +12,7 @@
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Edit contact"
+        android:text="Contact info"
         android:textAlignment="center"
         android:textColor="#798784"
         android:textSize="35sp"
@@ -22,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/addContactImage"
+        android:id="@+id/contactImageView"
         android:layout_width="340dp"
         android:layout_height="340dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,8 +32,8 @@
         app:layout_constraintVertical_bias="0.173"
         app:roundedCornerRadius="8dp" />
 
-    <EditText
-        android:id="@+id/nameEditText"
+    <TextView
+        android:id="@+id/nameTextView"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -42,60 +41,46 @@
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:hint="@string/name"
         android:padding="16dp"
-        android:singleLine="true"
-        android:textColorHint="#9CAFAA"
+        android:text="@string/name"
+        android:textColor="#798784"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addContactImage"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintTop_toBottomOf="@+id/contactImageView"
+        app:layout_constraintVertical_bias="0.193" />
 
-    <EditText
-        android:id="@+id/phoneEditText"
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="235dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="#EFBC9B"
+        android:drawableLeft="@drawable/edit"
+        android:text="Edit"
+        android:textColor="#798784"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTextView" />
+
+    <TextView
+        android:id="@+id/phoneTextView"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:hint="Phone number"
         android:padding="16dp"
-        android:textColorHint="#9CAFAA"
+        android:text="@string/phone_number"
+        android:textColor="#798784"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="235dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#EFBC9B"
-        android:drawableLeft="@drawable/save"
-        android:text="@string/save"
-        android:textSize="16sp"
-        android:textColor="#798784"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
-
-    <Button
-        android:id="@+id/button_delete"
-        android:layout_width="235dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#EFBC9B"
-        android:drawableLeft="@drawable/delete"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Delete"
-        android:textColor="#798784"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_save" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.nsu.contact.application.Application
-import ru.nsu.contact.application.databinding.ActivityAddContactBinding
+import ru.nsu.contact.application.databinding.ActivityEditContactBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
 import ru.tinkoff.decoro.MaskImpl
@@ -15,16 +15,14 @@ import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import javax.inject.Inject
 
-
-class AddContactActivity : AppCompatActivity() {
-
+class EditContactActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
     private val viewModel: ContactViewModel by viewModels { viewModelFactory }
 
-    private val binding: ActivityAddContactBinding by lazy {
-        ActivityAddContactBinding.inflate(
+    private val binding: ActivityEditContactBinding by lazy {
+        ActivityEditContactBinding.inflate(
             LayoutInflater.from(
                 this
             )
@@ -36,22 +34,23 @@ class AddContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.addContactImage.setImageURI("https://goo.su/03kflYr")
-
         val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
         mask.isForbidInputWhenFilled = false
         val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
         formatWatcher.installOn(binding.phoneEditText)
+
+        val contact = intent.getSerializableExtra("contact", Contact::class.java)!!
+
+        binding.nameEditText.setText(contact.name)
+        binding.phoneEditText.setText(contact.phoneNumber)
+        binding.addContactImage.setImageURI(contact.photoUrl)
 
         binding.buttonSave.setOnClickListener {
             val name = binding.nameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             //TODO add photo
             if (name.isNotBlank() && phone.isNotBlank()) {
-                val newContact = Contact(
-                    0, name, phone,
-                    "https://goo.su/03kflYr"
-                )
+                val newContact = Contact(contact.id, name, phone, contact.photoUrl)
                 viewModel.addContact(newContact)
                 finish()
             } else {

@@ -9,7 +9,7 @@ class ContactEntityMapper {
             contact.id,
             contact.name,
             contact.phoneNumber,
-            contact.photoUri
+            contact.photoUrl
         )
     }
 
