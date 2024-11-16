@@ -5,16 +5,15 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import ru.nsu.contact.application.data.entity.ContactEntity
 
 @Dao
 interface ContactDao {
     @Query("Select * FROM contact")
-    fun getContacts(): Flow<List<ContactEntity>>
+    suspend fun getContacts(): List<ContactEntity>
 
     @Query("Select * FROM contact WHERE id = :id")
-    suspend fun getContactById(id: Int): ContactEntity?
+    suspend fun getContactById(id: Long): ContactEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertContact(contact: ContactEntity)

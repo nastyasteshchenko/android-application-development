@@ -1,12 +1,11 @@
 package ru.nsu.contact.application.domain.repository
 
-import kotlinx.coroutines.flow.Flow
 import ru.nsu.contact.application.domain.model.Contact
 
 interface ContactRepository {
-    fun getContacts(): Flow<List<Contact>>
+    suspend fun getContacts(): List<Contact>
 
-    suspend fun getContactById(contactId: Int): Contact?
+    suspend fun getContactById(contactId: Long): Contact?
 
     suspend fun insertContact(contact: Contact)
 

@@ -1,6 +1,5 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.domain.model.Contact
 
-class ContactAdapter(private val context: Context) :
+class ContactAdapter :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     private var items = ArrayList<Contact>()
@@ -32,6 +31,10 @@ class ContactAdapter(private val context: Context) :
         holder.name.text = contact.name
         holder.phoneNumber.text = contact.phoneNumber
         holder.image.setImageURI(contact.photoUri)
+    }
+
+    fun updateContacts(newContacts: List<Contact>) {
+        items = newContacts as ArrayList<Contact>
     }
 
     override fun getItemCount(): Int = items.size
