@@ -2,13 +2,13 @@ package ru.nsu.contact.application.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.databinding.ActivityMainBinding
-import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
 import ru.nsu.contact.application.ui.adapter.ContactAdapter
 import javax.inject.Inject
@@ -32,14 +32,17 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    //TODO убрать моргание
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as Application).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
+        //Todo di
         val adapter = ContactAdapter {
-
+            val intent = Intent(this, ShowContactInfoActivity::class.java)
+            intent.putExtra("contact", it)
+            startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
@@ -51,8 +54,8 @@ class MainActivity : AppCompatActivity() {
             )
         binding.recyclerView.addItemDecoration(spaceDecoration)
 
-        viewModel.contacts.observe(this) { contacts ->
-            adapter.updateData(contacts)
+        viewModel.contacts.observe(this) {
+            adapter.updateData(it)
         }
 
         viewModel.fetchContacts()
@@ -61,5 +64,4 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddContactActivity::class.java))
         }
     }
-
 }

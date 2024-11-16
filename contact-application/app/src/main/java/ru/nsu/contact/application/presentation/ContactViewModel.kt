@@ -10,13 +10,11 @@ import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.domain.usecase.AddContactUseCase
 import ru.nsu.contact.application.domain.usecase.DeleteContactUseCase
 import ru.nsu.contact.application.domain.usecase.GetAllContactsUseCase
-import ru.nsu.contact.application.domain.usecase.GetContactUseCase
 import ru.nsu.contact.application.domain.usecase.UpdateContactUseCase
 import javax.inject.Inject
 
 class ContactViewModel(
     private val deleteContactUseCase: DeleteContactUseCase,
-    private val getContactUseCase: GetContactUseCase,
     private val updateContactUseCase: UpdateContactUseCase,
     private val addContactUseCase: AddContactUseCase,
     private val getAllContactsUseCase: GetAllContactsUseCase
@@ -54,7 +52,6 @@ class ContactViewModel(
 
     class ViewModelFactory @Inject constructor(
         private val deleteContactUseCase: DeleteContactUseCase,
-        private val getContactUseCase: GetContactUseCase,
         private val updateContactUseCase: UpdateContactUseCase,
         private val addContactUseCase: AddContactUseCase,
         private val getAllContactsUseCase: GetAllContactsUseCase
@@ -63,12 +60,10 @@ class ContactViewModel(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return ContactViewModel(
                 deleteContactUseCase,
-                getContactUseCase,
                 updateContactUseCase,
                 addContactUseCase,
                 getAllContactsUseCase
             ) as T
-
         }
     }
 }

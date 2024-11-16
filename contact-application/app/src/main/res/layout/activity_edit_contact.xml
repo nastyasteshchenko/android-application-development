@@ -21,8 +21,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="54dp"
+        android:layout_height="31dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/name"
+        android:textColor="#798784"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/nameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactImage"
+        app:layout_constraintVertical_bias="0.979" />
+
+    <TextView
+        android:layout_width="154dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/phone_number"
+        android:textColor="#798784"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/addContactImage"
+        android:id="@+id/contactImage"
         android:layout_width="340dp"
         android:layout_height="340dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,24 +74,26 @@
         android:hint="@string/name"
         android:padding="16dp"
         android:singleLine="true"
+        android:textColor="#798784"
         android:textColorHint="#9CAFAA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addContactImage"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintTop_toBottomOf="@+id/contactImage"
+        app:layout_constraintVertical_bias="0.158" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
         android:hint="Phone number"
         android:padding="16dp"
+        android:textColor="#798784"
         android:textColorHint="#9CAFAA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
@@ -70,24 +101,24 @@
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/saveButton"
         android:layout_width="235dp"
         android:layout_height="70dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#EFBC9B"
         android:drawableLeft="@drawable/save"
         android:text="@string/save"
-        android:textSize="16sp"
         android:textColor="#798784"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
 
     <Button
-        android:id="@+id/button_delete"
+        android:id="@+id/deleteButton"
         android:layout_width="235dp"
         android:layout_height="70dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#EFBC9B"
         android:drawableLeft="@drawable/delete"
         android:drawablePadding="8dp"
@@ -97,5 +128,5 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_save" />
+        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

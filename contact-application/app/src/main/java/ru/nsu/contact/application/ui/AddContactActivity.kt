@@ -14,13 +14,16 @@ import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
 class AddContactActivity : AppCompatActivity() {
 
     @Inject
+    @Singleton
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
+    //TODO singleton for view model or some other fixes
     private val viewModel: ContactViewModel by viewModels { viewModelFactory }
 
     private val binding: ActivityAddContactBinding by lazy {
@@ -36,14 +39,14 @@ class AddContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.addContactImage.setImageURI("https://goo.su/03kflYr")
+        binding.contactImage.setImageURI("https://goo.su/03kflYr")
 
         val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
         mask.isForbidInputWhenFilled = false
         val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
         formatWatcher.installOn(binding.phoneEditText)
 
-        binding.buttonSave.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             //TODO add photo

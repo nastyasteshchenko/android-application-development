@@ -18,11 +18,6 @@ class ContactRepositoryImpl
         }
     }
 
-    override suspend fun getContactById(contactId: Long): Contact? {
-        val contactEntity = contactDao.getContactById(contactId) ?: return null
-        return contactEntityMapper.toContact(contactEntity)
-    }
-
     override suspend fun insertContact(contact: Contact) {
         return contactDao.insertContact(contactEntityMapper.toContactEntity(contact))
     }

@@ -12,9 +12,6 @@ interface ContactDao {
     @Query("Select * FROM contact")
     suspend fun getContacts(): List<ContactEntity>
 
-    @Query("Select * FROM contact WHERE id = :id")
-    suspend fun getContactById(id: Long): ContactEntity?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertContact(contact: ContactEntity)
 

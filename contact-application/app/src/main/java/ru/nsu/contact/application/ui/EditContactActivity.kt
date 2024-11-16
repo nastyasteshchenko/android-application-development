@@ -1,5 +1,6 @@
 package ru.nsu.contact.application.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -14,9 +15,11 @@ import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class EditContactActivity : AppCompatActivity() {
     @Inject
+    @Singleton
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
     private val viewModel: ContactViewModel by viewModels { viewModelFactory }
@@ -43,19 +46,29 @@ class EditContactActivity : AppCompatActivity() {
 
         binding.nameEditText.setText(contact.name)
         binding.phoneEditText.setText(contact.phoneNumber)
-        binding.addContactImage.setImageURI(contact.photoUrl)
+        binding.contactImage.setImageURI(contact.photoUrl)
 
-        binding.buttonSave.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             //TODO add photo
             if (name.isNotBlank() && phone.isNotBlank()) {
                 val newContact = Contact(contact.id, name, phone, contact.photoUrl)
-                viewModel.addContact(newContact)
-                finish()
+                viewModel.updateContact(newContact)
+                val intent = Intent(this, ShowContactInfoActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.putExtra("contact", newContact)
+                startActivity(intent)
             } else {
                 Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.deleteButton.setOnClickListener {
+            viewModel.deleteContact(contact)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
         }
     }
 }
