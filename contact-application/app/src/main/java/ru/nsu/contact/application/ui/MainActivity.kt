@@ -15,6 +15,10 @@ import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.ActivityMainBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.ui.fragment.AddContactFragment
+import ru.nsu.contact.application.ui.fragment.ContactListFragment
+import ru.nsu.contact.application.ui.fragment.EditContactFragment
+import ru.nsu.contact.application.ui.fragment.ShowContactFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -78,8 +82,6 @@ class MainActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
-        } else {
-            loadContacts()
         }
     }
 
@@ -99,19 +101,35 @@ class MainActivity : AppCompatActivity() {
         cursor?.use {
             while (it.moveToNext()) {
                 val id =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
+                    it.getString(
+                        it.getColumnIndexOrThrow(
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+                        )
+                    )
                 val name =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                    it.getString(
+                        it.getColumnIndexOrThrow(
+                            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                        )
+                    )
                 val phoneNumber =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                    it.getString(
+                        it.getColumnIndexOrThrow(
+                            ContactsContract.CommonDataKinds.Phone.NUMBER
+                        )
+                    )
                 var photo =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
+                    it.getString(
+                        it.getColumnIndexOrThrow(
+                            ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+                        )
+                    )
                 if (photo.isNullOrEmpty()) {
                     photo = "https://goo.su/03kflYr"
                 }
                 val contact = Contact(
                     id.toLong(), name = name, phoneNumber = phoneNumber,
-                    photoUrl = photo
+                    photoUri = photo
                 )
 
                 if (!contacts.contains(contact)) {

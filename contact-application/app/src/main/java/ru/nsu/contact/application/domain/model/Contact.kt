@@ -6,5 +6,5 @@ data class Contact(
     val id: Long,
     val name: String,
     val phoneNumber: String,
-    val photoUrl: String? = null
+    val photoUri: String
 ) : Serializable

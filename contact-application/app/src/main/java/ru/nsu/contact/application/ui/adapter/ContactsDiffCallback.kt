@@ -1,4 +1,4 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.nsu.contact.application.domain.model.Contact

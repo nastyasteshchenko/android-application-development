@@ -1,4 +1,4 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nsu.contact.application.databinding.FragmentContactListBinding
 import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.ui.adapter.SpaceItemDecoration
 import ru.nsu.contact.application.ui.adapter.ContactAdapter
 import javax.inject.Inject
 

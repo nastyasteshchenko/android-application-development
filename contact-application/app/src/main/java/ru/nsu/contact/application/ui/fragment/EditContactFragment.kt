@@ -1,5 +1,7 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.fragment
 
+import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,20 +20,20 @@ import androidx.fragment.app.setFragmentResultListener
 import ru.nsu.contact.application.databinding.FragmentEditContactBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.ui.copyImageToAppDirectory
 import javax.inject.Inject
-import javax.inject.Singleton
 
-class EditContactFragment @Inject constructor(): Fragment() {
+class EditContactFragment @Inject constructor() : Fragment() {
 
     companion object {
         const val TAG: String = "EditContact"
+        private val DEFAULT_PHOTO_URI = Uri.parse("https://goo.su/03kflYr")
     }
 
     @Inject
-    @Singleton
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
-    private val viewModel: ContactViewModel by activityViewModels{viewModelFactory}
+    private val viewModel: ContactViewModel by activityViewModels { viewModelFactory }
 
     private val binding: FragmentEditContactBinding by lazy {
         FragmentEditContactBinding.inflate(
@@ -39,6 +42,16 @@ class EditContactFragment @Inject constructor(): Fragment() {
             )
         )
     }
+
+    private var currentImageUri: Uri = DEFAULT_PHOTO_URI
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                binding.contactImage.setImageURI(uri)
+                currentImageUri = uri
+            }
+        }
 
     private val workerThread = HandlerThread("WorkerThread")
 
@@ -53,6 +66,17 @@ class EditContactFragment @Inject constructor(): Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.contactImage.setImageURI(currentImageUri)
+
+        binding.contactImage.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
+
+        binding.contactImage.setOnLongClickListener {
+            showDeleteDialog()
+            true
+        }
+
         workerThread.start()
         val handler = Handler(workerThread.looper)
         handler.post {
@@ -63,23 +87,34 @@ class EditContactFragment @Inject constructor(): Fragment() {
             val contact = bundle.getParcelable("contact", Contact::class.java)!!
             binding.nameEditText.setText(contact.name)
             binding.phoneEditText.setText(contact.phoneNumber)
-            binding.contactImage.setImageURI(contact.photoUrl)
+            binding.contactImage.setImageURI(contact.photoUri)
 
             binding.saveButton.setOnClickListener {
                 val name = binding.nameEditText.text.toString()
                 val phone = binding.phoneEditText.text.toString()
-                //TODO add photo
+                if (currentImageUri != DEFAULT_PHOTO_URI) {
+                    currentImageUri =
+                        copyImageToAppDirectory(this.requireContext(), currentImageUri)
+                }
                 if (name.isNotBlank() && phone.isNotBlank()) {
-                    val newContact = Contact(contact.id, name, phone, contact.photoUrl)
+                    val newContact = Contact(
+                        contact.id, name, phone, currentImageUri.toString()
+                    )
                     viewModel.updateContact(newContact)
-                    setFragmentResult("showContact", bundleOf("contact" to newContact))
+                    setFragmentResult(
+                        "showContact",
+                        bundleOf("contact" to newContact)
+                    )
                     requireActivity().supportFragmentManager
                         .popBackStack(
                             ShowContactFragment.TAG,
                             FragmentManager.POP_BACK_STACK_INCLUSIVE
                         )
                 } else {
-                    Toast.makeText(this.requireContext(), "Fill all fields", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this.requireContext(), "Fill all fields",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -90,5 +125,22 @@ class EditContactFragment @Inject constructor(): Fragment() {
                     .popBackStack(ContactListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        workerThread.quit()
+    }
+
+    private fun showDeleteDialog() {
+        AlertDialog.Builder(requireContext())
+            .setMessage("Are you sure you want to delete this photo?")
+            .setPositiveButton("Yes") { _, _ ->
+                currentImageUri = DEFAULT_PHOTO_URI
+                binding.contactImage.setImageURI(currentImageUri)
+            }
+            .setNegativeButton("No", null)
+            .create()
+            .show()
     }
 }

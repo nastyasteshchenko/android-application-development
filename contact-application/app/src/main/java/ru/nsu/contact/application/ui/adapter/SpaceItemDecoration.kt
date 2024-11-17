@@ -1,4 +1,4 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.adapter
 
 import android.graphics.Rect
 import android.view.View

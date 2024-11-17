@@ -1,7 +1,7 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.adapter
 
 import ru.nsu.contact.application.domain.model.Contact
 
-fun interface OnContactTapListener {
+fun interface OnContactClickListener {
     fun onClickContact(contact: Contact)
 }

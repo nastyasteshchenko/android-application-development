@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.view.SimpleDraweeView
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.domain.model.Contact
-import ru.nsu.contact.application.ui.ContactsDiffCallback
-import ru.nsu.contact.application.ui.OnContactTapListener
 
-class ContactAdapter(private val contactClickListener: OnContactTapListener) :
+class ContactAdapter(private val contactClickListener: OnContactClickListener) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    private var items = ArrayList<Contact>()
+    private var contacts = ArrayList<Contact>()
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.contactName)
@@ -30,20 +28,20 @@ class ContactAdapter(private val contactClickListener: OnContactTapListener) :
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        val contact = items[position]
+        val contact = contacts[position]
         holder.name.text = contact.name
         holder.phoneNumber.text = contact.phoneNumber
-        holder.image.setImageURI(contact.photoUrl)
+        holder.image.setImageURI(contact.photoUri)
         holder.itemView.setOnClickListener { contactClickListener.onClickContact(contact) }
     }
 
     fun updateData(newItems: List<Contact>) {
-        val diffCallback = ContactsDiffCallback(items, newItems)
+        val diffCallback = ContactsDiffCallback(contacts, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        items.clear()
-        items.addAll(newItems)
+        contacts.clear()
+        contacts.addAll(newItems)
         diffResult.dispatchUpdatesTo(this)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = contacts.size
 }

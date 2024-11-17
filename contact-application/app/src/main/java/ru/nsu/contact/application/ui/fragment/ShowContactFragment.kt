@@ -1,4 +1,4 @@
-package ru.nsu.contact.application.ui
+package ru.nsu.contact.application.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -45,7 +45,7 @@ class ShowContactFragment @Inject constructor() : Fragment() {
 
             binding.nameTextView.text = contact.name
             binding.phoneTextView.text = contact.phoneNumber
-            binding.contactImageView.setImageURI(contact.photoUrl)
+            binding.contactImageView.setImageURI(contact.photoUri)
 
             binding.editButton.setOnClickListener {
                 setFragmentResult("editContact", bundleOf("contact" to contact))
