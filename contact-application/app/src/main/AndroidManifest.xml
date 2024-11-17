@@ -24,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.AddContactActivity" />
-        <activity android:name=".ui.EditContactActivity" />
-        <activity android:name=".ui.ShowContactInfoActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -12,10 +12,8 @@ class ContactsDiffCallback(
 
     override fun getNewListSize(): Int = newItems.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldItems[oldItemPosition]::class == newItems[newItemPosition]::class
-                && oldItems[oldItemPosition].id == newItems[newItemPosition].id
-    }
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        oldItems[oldItemPosition].id == newItems[newItemPosition].id
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldItems[oldItemPosition] == newItems[newItemPosition]
