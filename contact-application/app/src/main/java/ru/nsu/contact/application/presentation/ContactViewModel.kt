@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.domain.usecase.AddContactUseCase
+import ru.nsu.contact.application.domain.usecase.AddContactsUseCase
 import ru.nsu.contact.application.domain.usecase.DeleteContactUseCase
 import ru.nsu.contact.application.domain.usecase.GetAllContactsUseCase
 import ru.nsu.contact.application.domain.usecase.UpdateContactUseCase
@@ -17,6 +18,7 @@ class ContactViewModel(
     private val deleteContactUseCase: DeleteContactUseCase,
     private val updateContactUseCase: UpdateContactUseCase,
     private val addContactUseCase: AddContactUseCase,
+    private val addContactsUseCase: AddContactsUseCase,
     private val getAllContactsUseCase: GetAllContactsUseCase
 ) : ViewModel() {
 
@@ -32,6 +34,13 @@ class ContactViewModel(
     fun addContact(contact: Contact) {
         viewModelScope.launch {
             addContactUseCase.invoke(contact)
+            fetchContacts()
+        }
+    }
+
+    fun addContacts(contacts: List<Contact>) {
+        viewModelScope.launch {
+            addContactsUseCase.invoke(contacts)
             fetchContacts()
         }
     }
@@ -54,6 +63,7 @@ class ContactViewModel(
         private val deleteContactUseCase: DeleteContactUseCase,
         private val updateContactUseCase: UpdateContactUseCase,
         private val addContactUseCase: AddContactUseCase,
+        private val addContactsUseCase: AddContactsUseCase,
         private val getAllContactsUseCase: GetAllContactsUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
@@ -62,6 +72,7 @@ class ContactViewModel(
                 deleteContactUseCase,
                 updateContactUseCase,
                 addContactUseCase,
+                addContactsUseCase,
                 getAllContactsUseCase
             ) as T
         }

@@ -10,10 +10,6 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import ru.nsu.contact.application.databinding.FragmentShowContactBinding
 import ru.nsu.contact.application.domain.model.Contact
-import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.slots.PredefinedSlots
-import ru.tinkoff.decoro.watchers.FormatWatcher
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import javax.inject.Inject
 
 class ShowContactFragment @Inject constructor() : Fragment() {
@@ -40,11 +36,6 @@ class ShowContactFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
-        mask.isForbidInputWhenFilled = false
-        val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
-        formatWatcher.installOn(binding.phoneTextView)
 
         val editContactFragment =
             requireActivity().supportFragmentManager.findFragmentByTag(EditContactFragment.TAG)!!

@@ -7,5 +7,7 @@ interface ContactRepository {
 
     suspend fun insertContact(contact: Contact)
 
+    suspend fun insertContacts(contacts: List<Contact>)
+
     suspend fun deleteContact(contact: Contact)
 }

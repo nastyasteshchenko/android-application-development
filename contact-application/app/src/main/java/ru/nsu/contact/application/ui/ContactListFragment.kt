@@ -24,7 +24,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
     @Inject
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
-    private val viewModel: ContactViewModel by activityViewModels{viewModelFactory}
+    private val viewModel: ContactViewModel by activityViewModels { viewModelFactory }
 
     private val binding: FragmentContactListBinding by lazy {
         FragmentContactListBinding.inflate(
@@ -47,7 +47,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
 
         val showContactFragment =
             requireActivity().supportFragmentManager.findFragmentByTag(ShowContactFragment.TAG)!!
-        //Todo di
+
         val adapter = ContactAdapter {
             setFragmentResult("showContact", bundleOf("contact" to it))
             requireActivity().supportFragmentManager.beginTransaction()

@@ -22,6 +22,11 @@ class ContactRepositoryImpl
         return contactDao.insertContact(contactEntityMapper.toContactEntity(contact))
     }
 
+    override suspend fun insertContacts(contacts: List<Contact>) {
+        val contactEntities = contacts.map { contactEntityMapper.toContactEntity(it) }.toList()
+        return contactDao.insertContacts(contactEntities)
+    }
+
     override suspend fun deleteContact(contact: Contact) {
         return contactDao.deleteContact(contactEntityMapper.toContactEntity(contact))
     }
