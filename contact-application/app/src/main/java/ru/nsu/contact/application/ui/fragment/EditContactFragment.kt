@@ -9,6 +9,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.FragmentEditContactBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
@@ -73,16 +75,12 @@ class EditContactFragment @Inject constructor() : Fragment() {
         }
 
         binding.contactImage.setOnLongClickListener {
-            showDeleteDialog()
+            showPopupMenu(it)
             true
         }
 
-        workerThread.start()
-        val handler = Handler(workerThread.looper)
-        handler.post {
-            val phoneNumberFormattingTextWatcher = PhoneNumberFormattingTextWatcher("RU")
-            binding.phoneEditText.addTextChangedListener(phoneNumberFormattingTextWatcher)
-        }
+        setTextWatcher()
+
         setFragmentResultListener("editContact") { key, bundle ->
             val contact = bundle.getParcelable("contact", Contact::class.java)!!
             binding.nameEditText.setText(contact.name)
@@ -96,27 +94,26 @@ class EditContactFragment @Inject constructor() : Fragment() {
                     currentImageUri =
                         copyImageToAppDirectory(this.requireContext(), currentImageUri)
                 }
-                if (name.isNotBlank() && phone.isNotBlank()) {
-                    val newContact = Contact(
-                        contact.id, name, phone, currentImageUri.toString()
-                    )
-                    viewModel.updateContact(newContact)
-                    setFragmentResult(
-                        "showContact",
-                        bundleOf("contact" to newContact)
-                    )
-                    requireActivity().supportFragmentManager
-                        .popBackStack(
-                            ShowContactFragment.TAG,
-                            FragmentManager.POP_BACK_STACK_INCLUSIVE
-                        )
-                } else {
+                if (name.isBlank() || phone.isBlank()) {
                     Toast.makeText(
                         this.requireContext(), "Fill all fields",
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
+                    return@setOnClickListener
                 }
+                val newContact = Contact(
+                    contact.id, name, phone, currentImageUri.toString()
+                )
+                viewModel.updateContact(newContact)
+                setFragmentResult(
+                    "showContact",
+                    bundleOf("contact" to newContact)
+                )
+                requireActivity().supportFragmentManager
+                    .popBackStack(
+                        ShowContactFragment.TAG,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
             }
 
             binding.deleteButton.setOnClickListener {
@@ -132,6 +129,23 @@ class EditContactFragment @Inject constructor() : Fragment() {
         workerThread.quit()
     }
 
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.delete_option_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.delete_item -> {
+                    showDeleteDialog()
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
     private fun showDeleteDialog() {
         AlertDialog.Builder(requireContext())
             .setMessage("Are you sure you want to delete this photo?")
@@ -142,5 +156,14 @@ class EditContactFragment @Inject constructor() : Fragment() {
             .setNegativeButton("No", null)
             .create()
             .show()
+    }
+
+    private fun setTextWatcher() {
+        workerThread.start()
+        val handler = Handler(workerThread.looper)
+        handler.post {
+            val phoneNumberFormattingTextWatcher = PhoneNumberFormattingTextWatcher("RU")
+            binding.phoneEditText.addTextChangedListener(phoneNumberFormattingTextWatcher)
+        }
     }
 }

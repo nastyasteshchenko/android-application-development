@@ -68,12 +68,7 @@ class AddContactFragment @Inject constructor() : Fragment() {
             pickImageLauncher.launch("image/*")
         }
 
-        workerThread.start()
-        val handler = Handler(workerThread.looper)
-        handler.post {
-            val phoneNumberFormattingTextWatcher = PhoneNumberFormattingTextWatcher("RU")
-            binding.phoneEditText.addTextChangedListener(phoneNumberFormattingTextWatcher)
-        }
+        setTextWatcher()
 
         binding.saveButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
@@ -98,5 +93,14 @@ class AddContactFragment @Inject constructor() : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         workerThread.quit()
+    }
+
+    private fun setTextWatcher() {
+        workerThread.start()
+        val handler = Handler(workerThread.looper)
+        handler.post {
+            val phoneNumberFormattingTextWatcher = PhoneNumberFormattingTextWatcher("RU")
+            binding.phoneEditText.addTextChangedListener(phoneNumberFormattingTextWatcher)
+        }
     }
 }
