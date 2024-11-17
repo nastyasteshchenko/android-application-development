@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("ru.tinkoff.decoro:decoro:1.1.1")
+    implementation("com.googlecode.libphonenumber:libphonenumber:8.2.0")
     
     implementation(libs.dagger.v2461)
     implementation(libs.dagger.android)

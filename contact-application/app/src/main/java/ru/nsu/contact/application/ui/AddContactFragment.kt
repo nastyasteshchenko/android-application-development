@@ -1,6 +1,9 @@
 package ru.nsu.contact.application.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +14,6 @@ import androidx.fragment.app.activityViewModels
 import ru.nsu.contact.application.databinding.FragmentAddContactBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
-import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.slots.PredefinedSlots
-import ru.tinkoff.decoro.watchers.FormatWatcher
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,7 +27,6 @@ class AddContactFragment @Inject constructor() : Fragment() {
     @Singleton
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
-    //TODO singleton for view model or some other fixes
     private val viewModel: ContactViewModel by activityViewModels { viewModelFactory }
 
     private val binding: FragmentAddContactBinding by lazy {
@@ -38,6 +36,8 @@ class AddContactFragment @Inject constructor() : Fragment() {
             )
         )
     }
+
+    private val workerThread = HandlerThread("WorkerThread")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,10 +52,12 @@ class AddContactFragment @Inject constructor() : Fragment() {
 
         binding.contactImage.setImageURI("https://goo.su/03kflYr")
 
-        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
-        mask.isForbidInputWhenFilled = false
-        val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
-        formatWatcher.installOn(binding.phoneEditText)
+        workerThread.start()
+        val handler = Handler(workerThread.looper)
+        handler.post {
+            val phoneNumberFormattingTextWatcher = PhoneNumberFormattingTextWatcher("RU")
+            binding.phoneEditText.addTextChangedListener(phoneNumberFormattingTextWatcher)
+        }
 
         binding.saveButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
@@ -63,11 +65,6 @@ class AddContactFragment @Inject constructor() : Fragment() {
             //TODO add photo
             if (name.isBlank() || phone.isBlank()) {
                 Toast.makeText(this.requireContext(), "Fill all fields", Toast.LENGTH_SHORT)
-                    .show()
-                return@setOnClickListener
-            }
-            if (phone.length != mask.size){
-                Toast.makeText(this.requireContext(), "Fill all phone number", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
@@ -79,5 +76,10 @@ class AddContactFragment @Inject constructor() : Fragment() {
             requireActivity().supportFragmentManager
                 .popBackStack(ContactListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        workerThread.quit()
     }
 }
