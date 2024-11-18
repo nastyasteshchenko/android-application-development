@@ -34,7 +34,8 @@ class ContactRepositoryImpl
     }
 
     override suspend fun getContactsFromContactBook(): List<Contact> {
-        return contactsFromBookDataSource.getContacts()
+        return contactsFromBookDataSource.getContacts().map { element ->
+            contactEntityMapper.toContact(element)
+        }
     }
-
 }

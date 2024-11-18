@@ -3,15 +3,15 @@ package ru.nsu.contact.application.data.datasource
 import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.ContactsContract
-import ru.nsu.contact.application.domain.model.Contact
+import ru.nsu.contact.application.data.entity.ContactEntity
 import javax.inject.Inject
 
 class ContactsFromBookDataSourceImpl @Inject constructor(
     private val contentResolver: ContentResolver
 ) : ContactsFromBookDataSource {
 
-    override fun getContacts(): List<Contact> {
-        val contacts = mutableListOf<Contact>()
+    override fun getContacts(): List<ContactEntity> {
+        val contacts = mutableListOf<ContactEntity>()
         val cursor: Cursor? = contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             arrayOf(
@@ -52,7 +52,7 @@ class ContactsFromBookDataSourceImpl @Inject constructor(
                 if (photo.isNullOrEmpty()) {
                     photo = "https://goo.su/03kflYr"
                 }
-                val contact = Contact(
+                val contact = ContactEntity(
                     id.toLong(), name = name, phoneNumber = phoneNumber,
                     photoUri = photo
                 )
