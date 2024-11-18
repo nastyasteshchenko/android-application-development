@@ -11,6 +11,7 @@ import ru.nsu.contact.application.domain.usecase.AddContactUseCase
 import ru.nsu.contact.application.domain.usecase.AddContactsUseCase
 import ru.nsu.contact.application.domain.usecase.DeleteContactUseCase
 import ru.nsu.contact.application.domain.usecase.GetAllContactsUseCase
+import ru.nsu.contact.application.domain.usecase.GetContactsFromContactBookUseCase
 import ru.nsu.contact.application.domain.usecase.UpdateContactUseCase
 import javax.inject.Inject
 
@@ -19,7 +20,8 @@ class ContactViewModel(
     private val updateContactUseCase: UpdateContactUseCase,
     private val addContactUseCase: AddContactUseCase,
     private val addContactsUseCase: AddContactsUseCase,
-    private val getAllContactsUseCase: GetAllContactsUseCase
+    private val getAllContactsUseCase: GetAllContactsUseCase,
+    private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase
 ) : ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>()
@@ -31,16 +33,17 @@ class ContactViewModel(
         }
     }
 
-    fun addContact(contact: Contact) {
+    fun fetchContactsFromContactBook() {
         viewModelScope.launch {
-            addContactUseCase.invoke(contact)
-            fetchContacts()
+            val contacts = getContactsFromContactBookUseCase.invoke()
+            addContactsUseCase.invoke(contacts)
+            _contacts.value = getAllContactsUseCase.invoke()
         }
     }
 
-    fun addContacts(contacts: List<Contact>) {
+    fun addContact(contact: Contact) {
         viewModelScope.launch {
-            addContactsUseCase.invoke(contacts)
+            addContactUseCase.invoke(contact)
             fetchContacts()
         }
     }
@@ -64,7 +67,8 @@ class ContactViewModel(
         private val updateContactUseCase: UpdateContactUseCase,
         private val addContactUseCase: AddContactUseCase,
         private val addContactsUseCase: AddContactsUseCase,
-        private val getAllContactsUseCase: GetAllContactsUseCase
+        private val getAllContactsUseCase: GetAllContactsUseCase,
+        private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -73,7 +77,8 @@ class ContactViewModel(
                 updateContactUseCase,
                 addContactUseCase,
                 addContactsUseCase,
-                getAllContactsUseCase
+                getAllContactsUseCase,
+                getContactsFromContactBookUseCase
             ) as T
         }
     }

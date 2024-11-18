@@ -10,4 +10,6 @@ interface ContactRepository {
     suspend fun insertContacts(contacts: List<Contact>)
 
     suspend fun deleteContact(contact: Contact)
+
+    suspend fun getContactsFromContactBook(): List<Contact>
 }
