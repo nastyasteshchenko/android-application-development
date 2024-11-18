@@ -9,7 +9,7 @@ import ru.nsu.contact.application.data.entity.ContactEntity
 
 @Dao
 interface ContactDao {
-    @Query("Select * FROM contact")
+    @Query("Select * FROM contact ORDER BY contact.name ASC")
     suspend fun getContacts(): List<ContactEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

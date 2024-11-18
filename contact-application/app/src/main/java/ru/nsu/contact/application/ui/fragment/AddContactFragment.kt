@@ -62,8 +62,6 @@ class AddContactFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.contactImage.setImageURI(currentImageUri)
-
         binding.contactImage.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
@@ -87,6 +85,15 @@ class AddContactFragment @Inject constructor() : Fragment() {
             viewModel.addContact(newContact)
             requireActivity().supportFragmentManager
                 .popBackStack(ContactListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            binding.phoneEditText.text.clear()
+            binding.nameEditText.text.clear()
+            binding.contactImage.setImageURI(DEFAULT_PHOTO_URI)
         }
     }
 
