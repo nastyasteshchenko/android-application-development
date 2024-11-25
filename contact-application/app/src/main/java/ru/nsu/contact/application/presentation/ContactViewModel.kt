@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.domain.usecase.AddContactUseCase
@@ -28,13 +29,13 @@ class ContactViewModel(
     val contacts: LiveData<List<Contact>> get() = _contacts
 
     fun fetchContacts() {
-        viewModelScope.launch {
-            _contacts.value = getAllContactsUseCase.invoke()
+        viewModelScope.launch(Dispatchers.IO) {
+            _contacts.postValue(getAllContactsUseCase.invoke())
         }
     }
 
     fun fetchContactsFromContactBook() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val contacts = getContactsFromContactBookUseCase.invoke()
             addContactsUseCase.invoke(contacts)
             _contacts.value = getAllContactsUseCase.invoke()
@@ -42,21 +43,21 @@ class ContactViewModel(
     }
 
     fun addContact(contact: Contact) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             addContactUseCase.invoke(contact)
             fetchContacts()
         }
     }
 
     fun deleteContact(contact: Contact) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             deleteContactUseCase.invoke(contact)
             fetchContacts()
         }
     }
 
     fun updateContact(contact: Contact) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             updateContactUseCase.invoke(contact)
             fetchContacts()
         }
