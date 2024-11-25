@@ -1,6 +1,7 @@
 package ru.nsu.contact.application.ui.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.FragmentEditContactBinding
 import ru.nsu.contact.application.domain.model.Contact
@@ -110,10 +112,7 @@ class EditContactFragment @Inject constructor() : Fragment() {
                     bundleOf("contact" to newContact)
                 )
                 requireActivity().supportFragmentManager
-                    .popBackStack(
-                        ShowContactFragment.TAG,
-                        FragmentManager.POP_BACK_STACK_INCLUSIVE
-                    )
+                    .popBackStack(ShowContactFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
 
             binding.deleteButton.setOnClickListener {
@@ -122,6 +121,11 @@ class EditContactFragment @Inject constructor() : Fragment() {
                     .popBackStack(ContactListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
+    }
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as Application).appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onDestroy() {

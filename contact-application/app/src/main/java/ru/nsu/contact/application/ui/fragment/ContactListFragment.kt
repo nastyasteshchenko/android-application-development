@@ -1,5 +1,6 @@
 package ru.nsu.contact.application.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.add
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.nsu.contact.application.Application
+import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.FragmentContactListBinding
 import ru.nsu.contact.application.presentation.ContactViewModel
 import ru.nsu.contact.application.ui.adapter.SpaceItemDecoration
@@ -46,14 +50,10 @@ class ContactListFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val showContactFragment =
-            requireActivity().supportFragmentManager.findFragmentByTag(ShowContactFragment.TAG)!!
-
         val adapter = ContactAdapter {
             setFragmentResult("showContact", bundleOf("contact" to it))
             requireActivity().supportFragmentManager.beginTransaction()
-                .hide(this)
-                .show(showContactFragment)
+                .add<ShowContactFragment>(R.id.fragment_container, ShowContactFragment.TAG)
                 .addToBackStack(TAG)
                 .commit()
         }
@@ -73,15 +73,16 @@ class ContactListFragment @Inject constructor() : Fragment() {
 
         viewModel.fetchContacts()
 
-        val addContactFragment =
-            requireActivity().supportFragmentManager.findFragmentByTag(AddContactFragment.TAG)!!
-
         binding.addContactButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .hide(this)
-                .show(addContactFragment)
+                .add<AddContactFragment>(R.id.fragment_container, AddContactFragment.TAG)
                 .addToBackStack(TAG)
                 .commit()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as Application).appComponent.inject(this)
+        super.onAttach(context)
     }
 }

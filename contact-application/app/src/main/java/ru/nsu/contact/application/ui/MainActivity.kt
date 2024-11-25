@@ -8,29 +8,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.add
 import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.ActivityMainBinding
 import ru.nsu.contact.application.presentation.ContactViewModel
-import ru.nsu.contact.application.ui.fragment.AddContactFragment
 import ru.nsu.contact.application.ui.fragment.ContactListFragment
-import ru.nsu.contact.application.ui.fragment.EditContactFragment
-import ru.nsu.contact.application.ui.fragment.ShowContactFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var editContactFragment: EditContactFragment
-
-    @Inject
-    lateinit var addContactFragment: AddContactFragment
-
-    @Inject
-    lateinit var showContactFragment: ShowContactFragment
-
-    @Inject
-    lateinit var contactListFragment: ContactListFragment
 
     @Inject
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
@@ -49,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { result ->
         if (result) {
-           viewModel.fetchContactsFromContactBook()
+            viewModel.fetchContactsFromContactBook()
         }
     }
 
@@ -62,13 +48,7 @@ class MainActivity : AppCompatActivity() {
         fetchContactsFromPhone()
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, contactListFragment, ContactListFragment.TAG)
-            .add(R.id.fragment_container, editContactFragment, EditContactFragment.TAG)
-            .add(R.id.fragment_container, showContactFragment, ShowContactFragment.TAG)
-            .add(R.id.fragment_container, addContactFragment, AddContactFragment.TAG)
-            .hide(addContactFragment)
-            .hide(editContactFragment)
-            .hide(showContactFragment)
+            .add<ContactListFragment>(R.id.fragment_container, ContactListFragment.TAG)
             .commit()
     }
 

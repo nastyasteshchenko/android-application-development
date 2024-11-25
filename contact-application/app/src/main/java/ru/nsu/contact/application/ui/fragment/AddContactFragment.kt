@@ -1,5 +1,6 @@
 package ru.nsu.contact.application.ui.fragment
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.databinding.FragmentAddContactBinding
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.presentation.ContactViewModel
@@ -95,6 +97,11 @@ class AddContactFragment @Inject constructor() : Fragment() {
             binding.nameEditText.text.clear()
             binding.contactImage.setImageURI(DEFAULT_PHOTO_URI)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as Application).appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onDestroy() {
