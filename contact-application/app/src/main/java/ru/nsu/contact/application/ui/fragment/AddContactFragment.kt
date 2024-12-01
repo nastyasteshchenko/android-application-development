@@ -64,6 +64,7 @@ class AddContactFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.contactImage.setImageURI(DEFAULT_PHOTO_URI)
         binding.contactImage.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
