@@ -10,4 +10,6 @@
     <string name="delete">Delete</string>
     <string name="contact_info">Contact info</string>
     <string name="edit">Edit</string>
+    <string name="clear_logs">Clear Logs</string>
+    <string name="debug_console">Debug Console</string>
 </resources>
