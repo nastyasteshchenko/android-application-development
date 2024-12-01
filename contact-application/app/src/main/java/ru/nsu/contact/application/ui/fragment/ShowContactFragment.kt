@@ -51,6 +51,7 @@ class ShowContactFragment : Fragment() {
                 setFragmentResult("editContact", bundleOf("contact" to contact))
                 requireActivity().supportFragmentManager.beginTransaction()
                     .add<EditContactFragment>(R.id.fragment_container, EditContactFragment.TAG)
+                    .hide(this)
                     .addToBackStack(TAG)
                     .commit()
             }

@@ -54,6 +54,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
             setFragmentResult("showContact", bundleOf("contact" to it))
             requireActivity().supportFragmentManager.beginTransaction()
                 .add<ShowContactFragment>(R.id.fragment_container, ShowContactFragment.TAG)
+                .hide(this)
                 .addToBackStack(TAG)
                 .commit()
         }
@@ -76,6 +77,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
         binding.addContactButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .add<AddContactFragment>(R.id.fragment_container, AddContactFragment.TAG)
+                .hide(this)
                 .addToBackStack(TAG)
                 .commit()
         }

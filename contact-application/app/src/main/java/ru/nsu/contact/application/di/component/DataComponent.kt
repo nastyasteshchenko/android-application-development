@@ -1,6 +1,5 @@
 package ru.nsu.contact.application.di.component
 
-import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.nsu.contact.application.Application
@@ -9,9 +8,11 @@ import ru.nsu.contact.application.data.datasource.ContactsFromBookDataSource
 import ru.nsu.contact.application.di.module.BindsDataModule
 import ru.nsu.contact.application.di.module.ProvidesDataModule
 import javax.inject.Scope
+import javax.inject.Singleton
 
 @Scope
 @Retention
+@Singleton
 annotation class DataScope
 
 @DataScope

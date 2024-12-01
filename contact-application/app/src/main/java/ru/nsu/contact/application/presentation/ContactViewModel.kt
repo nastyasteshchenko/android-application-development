@@ -38,7 +38,7 @@ class ContactViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val contacts = getContactsFromContactBookUseCase.invoke()
             addContactsUseCase.invoke(contacts)
-            _contacts.value = getAllContactsUseCase.invoke()
+            fetchContacts()
         }
     }
 

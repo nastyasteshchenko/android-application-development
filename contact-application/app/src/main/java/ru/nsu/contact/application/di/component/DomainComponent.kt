@@ -4,9 +4,11 @@ import dagger.Component
 import ru.nsu.contact.application.di.module.DomainModule
 import ru.nsu.contact.application.domain.repository.ContactRepository
 import javax.inject.Scope
+import javax.inject.Singleton
 
 @Scope
 @Retention
+@Singleton
 annotation class DomainScope
 
 @DomainScope
