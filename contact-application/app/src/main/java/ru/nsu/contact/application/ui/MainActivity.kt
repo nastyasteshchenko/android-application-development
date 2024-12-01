@@ -1,6 +1,7 @@
 package ru.nsu.contact.application.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val APP_PREFERENCES_NAME = "app_preferences"
+        private const val IS_PERMISSION_REQUESTED_PREFERENCES_NAME = "is_permission_requested"
+    }
+
     @Inject
     lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
 
@@ -25,9 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(
-            LayoutInflater.from(
-                this
-            )
+            LayoutInflater.from(this)
         )
     }
 
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         if (result) {
             viewModel.fetchContactsFromContactBook()
         }
+        savePermissionStatus()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +58,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchContactsFromPhone() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        val isPermissionRequested = sharedPreferences.getBoolean(
+            IS_PERMISSION_REQUESTED_PREFERENCES_NAME, false
+        )
+
+        if (!isPermissionRequested) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_CONTACTS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+            }
+        }
+    }
+
+    private fun savePermissionStatus() {
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putBoolean(IS_PERMISSION_REQUESTED_PREFERENCES_NAME, true)
+            apply()
         }
     }
 }
