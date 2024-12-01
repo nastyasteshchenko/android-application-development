@@ -7,11 +7,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="203dp"
         android:layout_height="57dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/add_contact"
         android:textAlignment="center"
@@ -20,7 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:layout_width="54dp"
@@ -34,7 +34,7 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImage"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.882" />
 
     <TextView
         android:layout_width="154dp"
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.96" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contactImage"
@@ -58,8 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.173"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.068"
         app:roundedCornerRadius="8dp" />
 
     <EditText
@@ -81,13 +81,13 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImage"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.204" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
@@ -115,6 +115,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneEditText"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

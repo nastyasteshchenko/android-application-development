@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImageView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.923" />
 
     <TextView
         android:layout_width="154dp"
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contactImageView"
@@ -57,9 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.173"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.083"
         app:roundedCornerRadius="8dp" />
+
 
     <TextView
         android:id="@+id/nameTextView"
@@ -79,8 +80,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImageView"
-        app:layout_constraintVertical_bias="0.193" />
-
+        app:layout_constraintVertical_bias="0.172" />
 
     <Button
         android:id="@+id/editButton"
@@ -94,15 +94,15 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
         android:id="@+id/phoneTextView"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
