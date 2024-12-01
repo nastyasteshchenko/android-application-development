@@ -1,25 +1,32 @@
 package ru.nsu.contact.application.di.component
 
 import dagger.Component
-import ru.nsu.contact.application.Application
-import ru.nsu.contact.application.di.module.BindsDataModule
-import ru.nsu.contact.application.di.module.ProvidesDataModule
-import ru.nsu.contact.application.di.module.DomainModule
+import ru.nsu.contact.application.domain.repository.ContactRepository
 import ru.nsu.contact.application.ui.MainActivity
 import ru.nsu.contact.application.ui.fragment.AddContactFragment
 import ru.nsu.contact.application.ui.fragment.ContactListFragment
 import ru.nsu.contact.application.ui.fragment.EditContactFragment
 import ru.nsu.contact.application.ui.fragment.ShowContactFragment
-import javax.inject.Singleton
+import javax.inject.Scope
 
-@Singleton
-@Component(modules = [ProvidesDataModule::class, BindsDataModule::class, DomainModule::class])
-interface AppComponent {
+@Scope
+@Retention
+annotation class UIScope
+
+@UIScope
+@Component(dependencies = [DomainComponent::class])
+interface UIComponent {
+
+    val contactRepository: ContactRepository
+
+    @Component.Factory
+    interface Factory {
+        fun create(domainComponent: DomainComponent): UIComponent
+    }
 
     fun inject(fragment: EditContactFragment)
     fun inject(fragment: ShowContactFragment)
     fun inject(fragment: ContactListFragment)
     fun inject(fragment: AddContactFragment)
     fun inject(activity: MainActivity)
-    fun inject(application: Application)
 }

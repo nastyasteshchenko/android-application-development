@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as Application).appComponent.inject(this)
+        (application as Application).uiComponent.inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

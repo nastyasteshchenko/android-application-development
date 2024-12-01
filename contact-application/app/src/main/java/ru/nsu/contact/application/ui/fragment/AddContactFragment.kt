@@ -100,7 +100,7 @@ class AddContactFragment @Inject constructor() : Fragment() {
     }
 
     override fun onAttach(context: Context) {
-        (requireActivity().application as Application).appComponent.inject(this)
+        (requireActivity().application as Application).uiComponent.inject(this)
         super.onAttach(context)
     }
 

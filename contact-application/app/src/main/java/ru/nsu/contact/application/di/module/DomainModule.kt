@@ -6,13 +6,13 @@ import ru.nsu.contact.application.data.datasource.ContactDataBase
 import ru.nsu.contact.application.data.datasource.ContactsFromBookDataSource
 import ru.nsu.contact.application.data.mapper.ContactEntityMapper
 import ru.nsu.contact.application.data.repository.ContactRepositoryImpl
+import ru.nsu.contact.application.di.component.DomainScope
 import ru.nsu.contact.application.domain.repository.ContactRepository
-import javax.inject.Singleton
 
 @Module
 class DomainModule {
 
-    @Singleton
+    @DomainScope
     @Provides
     fun provideNoteRepository(
         database: ContactDataBase,
