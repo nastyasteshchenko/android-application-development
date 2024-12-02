@@ -83,7 +83,7 @@ class EditContactFragment @Inject constructor() : Fragment() {
 
         setTextWatcher()
 
-        setFragmentResultListener("editContact") { key, bundle ->
+        setFragmentResultListener("editContact") { _, bundle ->
             val contact = bundle.getParcelable("contact", Contact::class.java)!!
             binding.nameEditText.setText(contact.name)
             binding.phoneEditText.setText(contact.phoneNumber)
