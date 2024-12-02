@@ -15,6 +15,13 @@ class LogcatReader(private var listener: LogcatListener) : Runnable {
         fun onLogReceived(log: String?)
     }
 
+    @Volatile
+    private var isRunning = true
+
+    fun stop() {
+        isRunning = false
+    }
+
     override fun run() {
         try {
             val pid = android.os.Process.myPid()
@@ -24,10 +31,11 @@ class LogcatReader(private var listener: LogcatListener) : Runnable {
                 InputStreamReader(process.inputStream)
             )
 
-            var line: String?
-            while ((bufferedReader.readLine().also { line = it }) != null) {
+            var line: String? = null
+            while (isRunning && bufferedReader.readLine().also { line = it } != null) {
                 listener.onLogReceived(line)
             }
+            process.destroy()
         } catch (e: IOException) {
             Log.e(TAG, "Error reading logs", e)
         }

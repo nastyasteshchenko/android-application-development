@@ -11,6 +11,9 @@ class DebugConsoleActivity : AppCompatActivity(), LogcatReader.LogcatListener {
         private const val MAX_LINES = 1000
     }
 
+    private val logcatReader: LogcatReader = LogcatReader(this)
+    private val logcatReaderThread: Thread = Thread(logcatReader)
+
     private val binding: ActivityDebugConsoleBinding by lazy {
         ActivityDebugConsoleBinding.inflate(
             LayoutInflater.from(this)
@@ -20,8 +23,15 @@ class DebugConsoleActivity : AppCompatActivity(), LogcatReader.LogcatListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val logcatReader = LogcatReader(this)
-        Thread(logcatReader).start()
+        binding.clearLogsButton.setOnClickListener {
+            binding.logsTextView.text = ""
+        }
+        logcatReaderThread.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        logcatReader.stop()
     }
 
     override fun onLogReceived(log: String?) {
