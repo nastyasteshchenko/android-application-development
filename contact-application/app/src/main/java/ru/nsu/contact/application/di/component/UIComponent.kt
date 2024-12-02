@@ -1,6 +1,7 @@
 package ru.nsu.contact.application.di.component
 
 import dagger.Component
+import ru.nsu.contact.application.domain.repository.AdvertisementBannerRepository
 import ru.nsu.contact.application.domain.repository.ContactRepository
 import ru.nsu.contact.application.ui.MainActivity
 import ru.nsu.contact.application.ui.fragment.AddContactFragment
@@ -18,6 +19,7 @@ annotation class UIScope
 interface UIComponent {
 
     val contactRepository: ContactRepository
+    val advertisementBannerRepository: AdvertisementBannerRepository
 
     @Component.Factory
     interface Factory {

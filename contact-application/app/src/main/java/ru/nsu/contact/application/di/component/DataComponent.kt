@@ -3,6 +3,7 @@ package ru.nsu.contact.application.di.component
 import dagger.BindsInstance
 import dagger.Component
 import ru.nsu.contact.application.Application
+import ru.nsu.contact.application.data.datasource.AdvertisementBannerDataSource
 import ru.nsu.contact.application.data.datasource.ContactDataBase
 import ru.nsu.contact.application.data.datasource.ContactsFromBookDataSource
 import ru.nsu.contact.application.di.module.BindsDataModule
@@ -30,4 +31,5 @@ interface DataComponent {
 
     fun provideNoteDatabase(): ContactDataBase
     fun provideContactFromBookDataSource(): ContactsFromBookDataSource
+    fun provideAdvertisementBannerDataSource(): AdvertisementBannerDataSource
 }

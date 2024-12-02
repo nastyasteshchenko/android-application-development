@@ -45,6 +45,20 @@ android {
         }
     }
 
+    flavorDimensions.add("version")
+    productFlavors {
+        create("free") {
+            dimension = "version"
+            applicationIdSuffix = ".free"
+            versionNameSuffix = "-free"
+            buildConfigField("boolean", "IS_FREE", "true")
+        }
+        create("paid") {
+            dimension = "version"
+            buildConfigField("boolean", "IS_FREE", "false")
+        }
+    }
+
     buildFeatures {
         viewBinding = true
         buildConfig = true
