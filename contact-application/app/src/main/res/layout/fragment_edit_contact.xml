@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImage"
-        app:layout_constraintVertical_bias="0.942" />
+        app:layout_constraintVertical_bias="0.923" />
 
     <TextView
         android:layout_width="154dp"
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contactImage"
@@ -55,10 +55,10 @@
         android:layout_height="340dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.069"
+        app:layout_constraintVertical_bias="0.083"
         app:roundedCornerRadius="8dp" />
 
     <EditText
@@ -80,13 +80,13 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactImage"
-        app:layout_constraintVertical_bias="0.204" />
+        app:layout_constraintVertical_bias="0.172" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/custom_text_fields_background"
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_medium"
