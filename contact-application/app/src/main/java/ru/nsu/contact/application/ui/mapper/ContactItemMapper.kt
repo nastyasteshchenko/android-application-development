@@ -6,11 +6,7 @@ import javax.inject.Inject
 
 class ContactItemMapper @Inject constructor() {
 
-    fun contactToContactItem(contact: Contact): Item.ContactItem {
-        return Item.ContactItem(contact.id, contact.name, contact.phoneNumber, contact.photoUri)
-    }
-
-    fun contactToContactItem(contacts: List<Contact>): List<Item.ContactItem> {
+    fun contactToContactItem(contacts: List<Contact>): List<Item> {
         return contacts.map { contactToContactItem(it) }
     }
 
@@ -23,7 +19,7 @@ class ContactItemMapper @Inject constructor() {
         )
     }
 
-    fun contactItemToContact(contactItems: List<Item.ContactItem>): List<Contact> {
-        return contactItems.map { contactItemToContact(it) }
+    private fun contactToContactItem(contact: Contact): Item {
+        return Item.ContactItem(contact.id, contact.name, contact.phoneNumber, contact.photoUri)
     }
 }

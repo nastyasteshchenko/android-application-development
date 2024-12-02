@@ -40,7 +40,7 @@ class ShowContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFragmentResultListener("showContact") { key, bundle ->
+        setFragmentResultListener("showContact") { _, bundle ->
             val contact = bundle.getParcelable("contact", Contact::class.java)!!
 
             binding.nameTextView.text = contact.name

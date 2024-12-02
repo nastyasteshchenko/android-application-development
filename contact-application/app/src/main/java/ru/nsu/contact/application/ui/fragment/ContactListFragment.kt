@@ -2,8 +2,6 @@ package ru.nsu.contact.application.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,17 +79,19 @@ class ContactListFragment @Inject constructor() : Fragment() {
         binding.recyclerView.addItemDecoration(spaceDecoration)
 
         viewModel.contacts.observe(this.requireActivity()) {
-            adapter.updateData(contactItemMapper.contactToContactItem(it))
+            val newItems = ArrayList(contactItemMapper.contactToContactItem(it))
+            if (BuildConfig.IS_FREE) {
+                val banner = bannerItemMapper.bannerToBannerItem(viewModel.getBanner())
+                if (newItems.size < 2) {
+                    newItems.add(banner)
+                } else {
+                    newItems.add(1, banner)
+                }
+            }
+            adapter.updateData(newItems)
         }
 
         viewModel.fetchContacts()
-
-        if (BuildConfig.IS_FREE) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                adapter.addBanner(bannerItemMapper.bannerToBannerItem(viewModel.getBanner()), 1)
-            }, 5000)
-            //TODO listener
-        }
 
         binding.addContactButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -101,6 +101,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
                 .commit()
         }
     }
+
 
     override fun onAttach(context: Context) {
         (requireActivity().application as Application).uiComponent.inject(this)

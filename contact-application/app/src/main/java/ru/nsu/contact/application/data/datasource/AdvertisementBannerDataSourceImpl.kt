@@ -10,7 +10,7 @@ class AdvertisementBannerDataSourceImpl @Inject constructor() : AdvertisementBan
         private const val BANNER_CATEGORY = "Technology"
         private const val BANNER_TITLE = "Twitter has a new boss"
         private const val BANNER_DESCRIPTION = "Big changes are coming"
-        private var id = 0L;
+        private var id = 0L
     }
 
     override fun getBanner(): BannerEntity {

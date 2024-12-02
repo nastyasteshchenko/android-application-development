@@ -52,21 +52,7 @@ class ContactAdapter(private val contactClickListener: OnContactClickListener) :
         }
     }
 
-    fun addBanner(banner: Item.BannerItem, position: Int) {
-        val newItems: ArrayList<Item> = ArrayList(items)
-        if (position > newItems.size - 1) {
-            newItems.add(banner)
-        } else {
-            newItems.add(position, banner)
-        }
-        val diffCallback = ContactsDiffCallback(items, newItems)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        items.clear()
-        items.addAll(newItems)
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun updateData(newItems: List<Item.ContactItem>) {
+    fun updateData(newItems: ArrayList<Item>) {
         val diffCallback = ContactsDiffCallback(items, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         items.clear()
