@@ -18,6 +18,7 @@ import ru.nsu.currency.converter.ui.adapter.spinner.CurrencyItemSelectedListener
 import ru.nsu.currency.converter.ui.adapter.spinner.CurrencySpinnerAdapter
 import javax.inject.Inject
 
+//TODO сделать шаблон для ввода циферок + подписывать в конце RUB либо мож это вынести куда-нить отдельно
 class CurrencyConverterFragment @Inject constructor() : Fragment() {
 
     companion object {
@@ -98,7 +99,7 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
     private fun updateConversionResultText(convertedValue: Double?, currency: Currency) {
         binding.conversionResult.text =
             this.getString(
-                R.string.conversion_result,
+                R.string.conversion_result_template,
                 convertedValue,
                 currency.charCode
             )

@@ -6,9 +6,10 @@
     <string name="enter_amount_in_rub">Enter amount in RUB</string>
     <string name="convert">Convert</string>
     <string name="conversion_error">Invalid input or no currency selected.</string>
-    <string name="no_conversion_result">Conversion Result: -</string>
-    <string name="conversion_result">Conversion Result: %1$.2f %2$s</string>
+    <string name="conversion_result_text">Conversion Result:</string>
+    <string name="conversion_result_template">%1$.2f %2$s</string>
     <string name="currency_list">Currency list</string>
     <string name="converter">Converter</string>
     <string name="refresh">Refresh</string>
+    <string name="rub_amount">RUB amount:</string>
 </resources>
