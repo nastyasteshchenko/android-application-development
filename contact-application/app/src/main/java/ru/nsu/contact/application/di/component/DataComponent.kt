@@ -28,6 +28,6 @@ interface DataComponent {
         fun build(): DataComponent
     }
 
-    fun provideNoteDatabase(): ContactDataBase
+    fun provideContactDatabase(): ContactDataBase
     fun provideContactFromBookDataSource(): ContactsFromBookDataSource
 }
