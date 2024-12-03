@@ -1,6 +1,8 @@
 package ru.nsu.currency.converter.di.component
 
 import dagger.Component
+import ru.nsu.currency.converter.di.module.DomainModule
+import ru.nsu.currency.converter.domain.repository.CurrencyRepository
 import javax.inject.Scope
 import javax.inject.Singleton
 
@@ -18,5 +20,5 @@ interface DomainComponent {
         fun create(dataComponent: DataComponent): DomainComponent
     }
 
-    fun provideContactRepository(): ContactRepository
+    fun provideCurrencyRepository(): CurrencyRepository
 }

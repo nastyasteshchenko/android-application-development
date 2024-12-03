@@ -7,6 +7,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 daggerCompiler = "2.46.1"
 daggerVersion = "2.46.1"
+fragmentKtx = "1.8.5"
 appcompat = "1.6.1"
 material = "1.10.0"
 constraintlayout = "2.1.4"
@@ -14,6 +15,7 @@ kotlinxMetadataJvm = "0.6.0"
 roomRuntime = "2.6.1"
 
 [libraries]
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }

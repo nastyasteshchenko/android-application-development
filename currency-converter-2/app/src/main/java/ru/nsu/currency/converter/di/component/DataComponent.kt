@@ -3,6 +3,7 @@ package ru.nsu.currency.converter.di.component
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import ru.nsu.currency.converter.data.datasource.CurrencyApi
 import ru.nsu.currency.converter.data.datasource.CurrencyDataBase
 import ru.nsu.currency.converter.di.module.ProvidesDataModule
 import javax.inject.Scope
@@ -27,5 +28,5 @@ interface DataComponent {
     }
 
     fun provideCurrencyDatabase(): CurrencyDataBase
-//    fun provideContactFromBookDataSource(): ContactsFromBookDataSource
+    fun provideCurrencyApi(): CurrencyApi
 }

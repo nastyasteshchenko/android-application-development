@@ -1,13 +1,14 @@
 package ru.nsu.currency.converter.data.dto
 
-import com.google.gson.annotations.SerializedName
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
 
-data class CBRResponse(
-    @SerializedName("Date") val date: String,
-    @SerializedName("PreviousDate") val prevDate: String,
-    @SerializedName("PreviousURL") val prevUrl: String,
-    @SerializedName("Timestamp") val timestamp: String,
-    @SerializedName("Valute") val valute: HashMap<String, ValuteResponse>
+data class CBRResponse @JsonCreator constructor(
+    @JsonProperty("Date") val date: String,
+    @JsonProperty("PreviousDate") val previousDate: String,
+    @JsonProperty("PreviousURL") val previousUrl: String,
+    @JsonProperty("Timestamp") val timestamp: String,
+    @JsonProperty("Valute") val valute: HashMap<String, CurrencyDto>
 )
 
 

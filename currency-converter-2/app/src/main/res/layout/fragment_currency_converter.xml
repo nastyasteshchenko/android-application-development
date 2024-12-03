@@ -1,0 +1,52 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F8EDE3">
+
+    <EditText
+        android:id="@+id/rubAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        android:background="@drawable/custom_text_fields_background"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/enter_amount_in_rub"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="#85586F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:popupBackground="@drawable/rounded_background"
+        android:id="@+id/currencySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="5dp"
+        android:background="@drawable/custom_text_fields_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conversionResult" />
+
+    <TextView
+        android:id="@+id/conversionResult"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/no_conversion_result"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="#85586F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rubAmount" />
+</androidx.constraintlayout.widget.ConstraintLayout>

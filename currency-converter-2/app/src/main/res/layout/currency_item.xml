@@ -3,34 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:background="@drawable/rounded_background"
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/currencyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/currency_name"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/currency_name_with_charcode"
+        android:textColor="#85586F"
         android:textSize="16sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/currencyCharCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/char_code"
-        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/currencyValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/value"
+        android:textColor="#996580"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/currencyPrevValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/previous_value"
+        android:textColor="#996580"
         android:textSize="14sp" />
 </LinearLayout>

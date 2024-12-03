@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import ru.nsu.currency.converter.data.dto.CBRResponse
 
 interface CurrencyApi {
+
     @GET("daily_json.js")
-    suspend fun getCurrencyRates(): Response<CBRResponse>
+    suspend fun getCurrencies(): Response<CBRResponse>
 }

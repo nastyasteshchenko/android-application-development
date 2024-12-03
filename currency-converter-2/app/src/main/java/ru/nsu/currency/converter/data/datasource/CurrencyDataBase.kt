@@ -6,6 +6,7 @@ import ru.nsu.currency.converter.data.entity.CurrencyEntity
 
 @Database(entities = [CurrencyEntity::class], version = 1)
 abstract class CurrencyDataBase : RoomDatabase() {
+
     abstract fun currencyDao(): CurrencyDao
 
     companion object {
