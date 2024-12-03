@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.nsu.currency.converter"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -59,6 +59,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
     implementation(libs.dagger.v2461)
     implementation(libs.dagger.android)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.dagger.compiler.v2461)
     kapt(libs.kotlinx.metadata.jvm)
     kapt("androidx.room:room-compiler:2.6.1")

@@ -4,7 +4,6 @@ import dagger.Component
 import ru.nsu.currency.converter.domain.repository.CurrencyRepository
 import ru.nsu.currency.converter.ui.fragment.CurrencyConverterFragment
 import ru.nsu.currency.converter.ui.fragment.CurrencyListFragment
-import ru.nsu.currency.converter.ui.MainActivity
 import javax.inject.Scope
 
 @Scope
@@ -22,7 +21,6 @@ interface UIComponent {
         fun create(domainComponent: DomainComponent): UIComponent
     }
 
-    fun inject(activity: MainActivity)
     fun inject(fragment: CurrencyListFragment)
     fun inject(fragment: CurrencyConverterFragment)
 }

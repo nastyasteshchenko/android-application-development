@@ -13,6 +13,7 @@ material = "1.10.0"
 constraintlayout = "2.1.4"
 kotlinxMetadataJvm = "0.6.0"
 roomRuntime = "2.6.1"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
@@ -29,6 +30,7 @@ dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "d
 dagger-compiler-v2461 = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
 dagger-v2461 = { module = "com.google.dagger:dagger", version.ref = "daggerVersion" }
 kotlinx-metadata-jvm = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version.ref = "kotlinxMetadataJvm" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

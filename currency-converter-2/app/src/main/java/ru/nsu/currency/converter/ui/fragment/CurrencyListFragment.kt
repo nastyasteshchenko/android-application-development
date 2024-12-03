@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nsu.currency.converter.Application
+import ru.nsu.currency.converter.R
 import ru.nsu.currency.converter.databinding.FragmentCurrencyListBinding
+import ru.nsu.currency.converter.domain.model.Currency
 import ru.nsu.currency.converter.presentation.CurrencyViewModel
 import ru.nsu.currency.converter.ui.adapter.recyclerview.CurrencyRecycleViewAdapter
 import ru.nsu.currency.converter.ui.adapter.recyclerview.SpaceItemDecoration
@@ -19,6 +21,7 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
 
     companion object {
         private const val VERTICAL_SPACE_HEIGHT_DP = 16
+        private const val SAVED_CURRENCY_LIST_KEY = "saved_currency_list"
     }
 
     @Inject
@@ -42,6 +45,7 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
         return binding.root
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,13 +59,43 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
             )
         binding.recyclerView.addItemDecoration(spaceDecoration)
 
+        savedInstanceState?.let {
+            val savedCurrencies =
+                it.getSerializable(
+                    SAVED_CURRENCY_LIST_KEY,
+                    ArrayList::class.java
+                ) as? ArrayList<Currency>
+            savedCurrencies?.let { adapter.updateData(it) }
+        }
+
         viewModel.currencies.observe(this.requireActivity()) {
             adapter.updateData(it)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
+        binding.swipeRefreshLayout
+            .setColorSchemeResources(
+                R.color.cannon_pink,
+                R.color.light_orange
+            )
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshCurrencies()
         }
         //TODO do refresh only if needed
-        viewModel.refreshCurrencies()
-        viewModel.fetchCurrencies()
 
+        if (savedInstanceState == null) {
+            viewModel.fetchCurrencies()
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val currentCurrencies = viewModel.currencies.value
+        if (currentCurrencies != null) {
+            outState.putSerializable(SAVED_CURRENCY_LIST_KEY, ArrayList(currentCurrencies))
+        }
     }
 
     override fun onAttach(context: Context) {

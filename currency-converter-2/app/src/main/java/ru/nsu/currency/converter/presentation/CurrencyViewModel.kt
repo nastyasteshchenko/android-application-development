@@ -29,6 +29,7 @@ class CurrencyViewModel(
     fun refreshCurrencies() {
         viewModelScope.launch(Dispatchers.IO) {
             refreshCurrenciesUseCase.invoke()
+            fetchCurrencies()
         }
     }
 
