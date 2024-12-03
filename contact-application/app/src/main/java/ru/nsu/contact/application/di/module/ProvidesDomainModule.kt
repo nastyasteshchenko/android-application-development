@@ -14,7 +14,7 @@ class ProvidesDomainModule {
 
     @DomainScope
     @Provides
-    fun provideNoteRepository(
+    fun provideContactRepository(
         database: ContactDataBase,
         contactsFromBookDataSource: ContactsFromBookDataSource
     ): ContactRepository = ContactRepositoryImpl(
