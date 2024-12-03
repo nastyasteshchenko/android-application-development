@@ -1,4 +1,4 @@
-package ru.nsu.currency.converter.response
+package ru.nsu.currency.converter.data.dto
 
 import com.google.gson.annotations.SerializedName
 import ru.nsu.currency.converter.model.Currency

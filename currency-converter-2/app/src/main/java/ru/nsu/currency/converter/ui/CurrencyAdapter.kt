@@ -1,4 +1,4 @@
-package ru.nsu.currency.converter
+package ru.nsu.currency.converter.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ru.nsu.currency.converter.OnCurrencyClickListener
+import ru.nsu.currency.converter.R
 import ru.nsu.currency.converter.model.Currency
 
 class CurrencyAdapter(

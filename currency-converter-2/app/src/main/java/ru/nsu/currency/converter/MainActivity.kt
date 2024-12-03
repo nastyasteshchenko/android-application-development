@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.currency.converter.model.Currency
+import ru.nsu.currency.converter.ui.CurrencyAdapter
 import java.io.IOException
 
 class MainActivity : AppCompatActivity(), OnCurrencyClickListener {

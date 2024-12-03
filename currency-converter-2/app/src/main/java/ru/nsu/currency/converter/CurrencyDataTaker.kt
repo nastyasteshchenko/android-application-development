@@ -4,8 +4,8 @@ import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import ru.nsu.currency.converter.model.Currency
-import ru.nsu.currency.converter.response.CBRResponse
-import ru.nsu.currency.converter.response.mapToDomainModel
+import ru.nsu.currency.converter.data.dto.CBRResponse
+import ru.nsu.currency.converter.data.dto.mapToDomainModel
 import java.io.IOException
 import java.util.Collections
 
