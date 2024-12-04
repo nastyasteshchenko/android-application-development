@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class CurrencyEntityMapper @Inject constructor() {
 
-    fun currencyEntityToCurrency(currencyEntity: List<CurrencyEntity>): List<Currency> {
-        return currencyEntity.map { currencyEntityToCurrency(it) }
+    fun currencyEntityToCurrency(currencyEntities: List<CurrencyEntity>): List<Currency> {
+        return currencyEntities.map { currencyEntityToCurrency(it) }
     }
 
     fun currencyDtoToCurrencyEntity(currenciesDtos: List<CurrencyDto>): List<CurrencyEntity> {

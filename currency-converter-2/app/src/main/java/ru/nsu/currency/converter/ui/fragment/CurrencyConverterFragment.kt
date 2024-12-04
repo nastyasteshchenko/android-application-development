@@ -82,9 +82,7 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
                 if (s.toString() == currentText) {
                     return
                 }
-                if (s.toString().endsWith(".", true)
-                    || s.toString().endsWith("0", true)
-                ) {
+                if (s.toString().contains(".", true)) {
                     currentText = s.toString()
                     setCurrentText()
                     return
