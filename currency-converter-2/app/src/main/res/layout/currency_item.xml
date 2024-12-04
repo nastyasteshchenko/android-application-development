@@ -17,6 +17,15 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/currencyNominal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/nominal"
+        android:textColor="#996580"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/currencyValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

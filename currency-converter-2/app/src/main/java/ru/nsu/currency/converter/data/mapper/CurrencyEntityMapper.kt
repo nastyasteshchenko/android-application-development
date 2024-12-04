@@ -18,7 +18,7 @@ class CurrencyEntityMapper @Inject constructor() {
     private fun currencyEntityToCurrency(currencyEntity: CurrencyEntity): Currency {
         return Currency(
             currencyEntity.id,
-            currencyEntity.name, currencyEntity.value,
+            currencyEntity.name, currencyEntity.nominal, currencyEntity.value,
             currencyEntity.prevValue, currencyEntity.charCode
         )
     }
@@ -26,7 +26,7 @@ class CurrencyEntityMapper @Inject constructor() {
     private fun currencyDtoToCurrencyEntity(currencyDto: CurrencyDto): CurrencyEntity {
         return CurrencyEntity(
             currencyDto.id,
-            currencyDto.name, currencyDto.value,
+            currencyDto.name, currencyDto.nominal, currencyDto.value,
             currencyDto.previous, currencyDto.charCode
         )
     }

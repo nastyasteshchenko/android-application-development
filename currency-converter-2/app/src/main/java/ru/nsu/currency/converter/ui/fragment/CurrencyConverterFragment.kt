@@ -27,6 +27,8 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
         private const val SAVED_SELECTED_CURRENCY_KEY = "saved_selected_currency"
     }
 
+    private val formatter = DecimalFormat("#,###.##")
+
     @Inject
     lateinit var viewModelFactory: CurrencyViewModel.ViewModelFactory
 
@@ -69,8 +71,8 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
         }
 
         binding.rubAmount.addTextChangedListener(object : TextWatcher {
-            private val formatter = DecimalFormat("#,###.#########")
             private var currentText = ""
+            private val formatter = DecimalFormat("#,###.#########")
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -126,7 +128,7 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
             val convertedValue = viewModel.convertCurrencyFromRubs(rubAmount, currency)
             binding.conversionResult.text = this.getString(
                 R.string.conversion_result_template,
-                convertedValue,
+                formatter.format(convertedValue),
                 currency.charCode
             )
         } catch (e: WrongRubAmountException) {

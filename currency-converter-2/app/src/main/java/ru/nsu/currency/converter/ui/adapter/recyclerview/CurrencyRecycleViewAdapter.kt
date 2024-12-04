@@ -18,6 +18,7 @@ class CurrencyRecycleViewAdapter(
 
     class CurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val currencyName: TextView = itemView.findViewById(R.id.currencyName)
+        val currencyNominal: TextView = itemView.findViewById(R.id.currencyNominal)
         val currencyValue: TextView = itemView.findViewById(R.id.currencyValue)
         val currencyPrevValue: TextView = itemView.findViewById(R.id.currencyPrevValue)
     }
@@ -38,6 +39,8 @@ class CurrencyRecycleViewAdapter(
         holder.currencyValue.text = context.getString(R.string.value, currency.value)
         holder.currencyPrevValue.text =
             context.getString(R.string.previous_value, currency.prevValue)
+        holder.currencyNominal.text =
+            context.getString(R.string.nominal, currency.nominal)
     }
 
     fun updateData(newItems: List<Currency>) {

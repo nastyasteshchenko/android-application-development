@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class CurrencyEntity(
     @PrimaryKey val id: String,
     val name: String,
+    val nominal: Int,
     val value: Double,
     val prevValue: Double,
     val charCode: String

@@ -13,6 +13,6 @@ class ConvertCurrencyFromRubsUseCase @Inject constructor() {
         if (rubAmount < 0) {
             throw WrongRubAmountException("Количество рублей не может быть отрицательным")
         }
-        return rubAmount / currency.value
+        return rubAmount / currency.value * currency.nominal
     }
 }
