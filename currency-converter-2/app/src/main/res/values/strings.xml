@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Currency converter</string>
     <string name="currency_name_with_charcode">%1$s (%2$s)</string>
-    <string name="value">Value: %1$.4f RUB</string>
-    <string name="previous_value">Previous value: %1$.4f RUB</string>
-    <string name="enter_amount_in_rub">Enter amount in RUB</string>
-    <string name="convert">Convert</string>
-    <string name="conversion_error">Invalid input or no currency selected.</string>
-    <string name="conversion_result_text">Conversion Result:</string>
+    <string name="value">Курс: %1$.4f RUB</string>
+    <string name="previous_value">Прошлый курс: %1$.4f RUB</string>
+    <string name="enter_amount_in_rub">Введите количество рублей</string>
+    <string name="conversion_result_text">Результат конвертации:</string>
     <string name="conversion_result_template">%1$.2f %2$s</string>
-    <string name="currency_list">Currency list</string>
-    <string name="converter">Converter</string>
-    <string name="refresh">Refresh</string>
-    <string name="rub_amount">RUB amount:</string>
+    <string name="currency_list">Список валют</string>
+    <string name="converter">Ковертер</string>
+    <string name="refresh">Обновить</string>
+    <string name="rub_amount">Количество рублей (RUB):</string>
 </resources>

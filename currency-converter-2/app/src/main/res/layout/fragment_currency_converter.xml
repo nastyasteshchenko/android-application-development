@@ -2,13 +2,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8EDE3"
+    android:fillViewport="true"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="#F8EDE3"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -29,6 +31,7 @@
             android:background="@drawable/custom_text_fields_background"
             android:fontFamily="@font/roboto_medium"
             android:hint="@string/enter_amount_in_rub"
+            android:textColorHint="#BCB1A4"
             android:inputType="numberDecimal"
             android:padding="16dp"
             android:textColor="#85586F" />

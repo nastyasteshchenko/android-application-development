@@ -22,7 +22,7 @@ class CurrencyViewModel(
     private val _currencies = MutableLiveData<List<Currency>>()
     val currencies: LiveData<List<Currency>> get() = _currencies
 
-    fun convertCurrencyFromRubs(rubAmount: Double, currency: Currency): Double {
+    fun convertCurrencyFromRubs(rubAmount: Double?, currency: Currency): Double {
         return convertCurrencyFromRubsUseCase.invoke(rubAmount, currency)
     }
 

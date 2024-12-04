@@ -12,13 +12,14 @@ import androidx.fragment.app.activityViewModels
 import ru.nsu.currency.converter.Application
 import ru.nsu.currency.converter.R
 import ru.nsu.currency.converter.databinding.FragmentCurrencyConverterBinding
+import ru.nsu.currency.converter.domain.exception.WrongRubAmountException
 import ru.nsu.currency.converter.domain.model.Currency
 import ru.nsu.currency.converter.presentation.CurrencyViewModel
 import ru.nsu.currency.converter.ui.adapter.spinner.CurrencyItemSelectedListener
 import ru.nsu.currency.converter.ui.adapter.spinner.CurrencySpinnerAdapter
+import java.text.DecimalFormat
 import javax.inject.Inject
 
-//TODO сделать шаблон для ввода циферок + подписывать в конце RUB либо мож это вынести куда-нить отдельно
 class CurrencyConverterFragment @Inject constructor() : Fragment() {
 
     companion object {
@@ -58,23 +59,52 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
         binding.currencySpinner.onItemSelectedListener =
             CurrencyItemSelectedListener { onConvertCurrency(it) }
 
-        savedInstanceState?.let {
-            val savedRubAmount = it.getString(SAVED_RUB_AMOUNT_KEY)
-            val savedCurrency: Currency? =
-                it.getSerializable(SAVED_SELECTED_CURRENCY_KEY, Currency::class.java)
+        savedInstanceState?.let { oit ->
+            val savedRubAmount = oit.getString(SAVED_RUB_AMOUNT_KEY)
+            val savedCurrency =
+                oit.getSerializable(SAVED_SELECTED_CURRENCY_KEY, Currency::class.java)
 
             binding.rubAmount.setText(savedRubAmount)
             savedCurrency?.let { onConvertCurrency(it) }
         }
 
         binding.rubAmount.addTextChangedListener(object : TextWatcher {
+            private val formatter = DecimalFormat("#,###.#########")
+            private var currentText = ""
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 onConvertCurrency(binding.currencySpinner.selectedItem as Currency)
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString() == currentText) {
+                    return
+                }
+                if (s.toString().endsWith(".", true)
+                    || s.toString().endsWith("0", true)
+                ) {
+                    currentText = s.toString()
+                    setCurrentText()
+                    return
+                }
+                val cleanString = s.toString().replace(",", "")
+                if (cleanString.isNotEmpty()) {
+                    currentText = formatCurrency(cleanString)
+                    setCurrentText()
+                }
+            }
+
+            private fun setCurrentText() {
+                binding.rubAmount.setText(currentText)
+                binding.rubAmount.setSelection(currentText.length)
+            }
+
+            private fun formatCurrency(value: String): String {
+                val parsed = value.toDoubleOrNull() ?: 0.0
+                return formatter.format(parsed)
+            }
         })
     }
 
@@ -91,30 +121,18 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
     }
 
     private fun onConvertCurrency(currency: Currency) {
-        val rubAmount = getEnteredRubAmount() ?: return
-        val convertedValue = convertToCurrentCurrency(rubAmount, currency)
-        updateConversionResultText(convertedValue, currency)
-    }
-
-    private fun updateConversionResultText(convertedValue: Double?, currency: Currency) {
-        binding.conversionResult.text =
-            this.getString(
+        val rubAmount = binding.rubAmount.text.toString()
+            .replace(",", "")
+            .toDoubleOrNull()
+        try {
+            val convertedValue = viewModel.convertCurrencyFromRubs(rubAmount, currency)
+            binding.conversionResult.text = this.getString(
                 R.string.conversion_result_template,
                 convertedValue,
                 currency.charCode
             )
-    }
-
-    private fun getEnteredRubAmount(): Double? {
-        val rubAmount = binding.rubAmount.text.toString().toDoubleOrNull()
-        if (rubAmount == null) {
-            binding.conversionResult.text = this.getString(R.string.conversion_error)
-            return null
+        } catch (e: WrongRubAmountException) {
+            binding.conversionResult.text = e.message
         }
-        return rubAmount
-    }
-
-    private fun convertToCurrentCurrency(rubAmount: Double, currency: Currency): Double {
-        return viewModel.convertCurrencyFromRubs(rubAmount, currency)
     }
 }
