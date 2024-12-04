@@ -59,9 +59,9 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
             )
         binding.recyclerView.addItemDecoration(spaceDecoration)
 
-        savedInstanceState?.let {
+        savedInstanceState?.let { oit ->
             val savedCurrencies =
-                it.getSerializable(
+                oit.getSerializable(
                     SAVED_CURRENCY_LIST_KEY,
                     ArrayList::class.java
                 ) as? ArrayList<Currency>
@@ -82,12 +82,10 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshCurrencies()
         }
-        //TODO do refresh only if needed
 
         if (savedInstanceState == null) {
             viewModel.fetchCurrencies()
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
