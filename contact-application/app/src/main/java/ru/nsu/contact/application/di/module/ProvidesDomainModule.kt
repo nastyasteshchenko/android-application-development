@@ -10,7 +10,7 @@ import ru.nsu.contact.application.di.component.DomainScope
 import ru.nsu.contact.application.domain.repository.ContactRepository
 
 @Module
-class DomainModule {
+class ProvidesDomainModule {
 
     @DomainScope
     @Provides

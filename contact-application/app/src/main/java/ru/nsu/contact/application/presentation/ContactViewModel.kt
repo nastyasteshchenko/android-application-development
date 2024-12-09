@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.nsu.contact.application.domain.model.Banner
 import ru.nsu.contact.application.domain.model.Contact
 import ru.nsu.contact.application.domain.usecase.AddContactUseCase
 import ru.nsu.contact.application.domain.usecase.AddContactsUseCase
 import ru.nsu.contact.application.domain.usecase.DeleteContactUseCase
+import ru.nsu.contact.application.domain.usecase.GetAdvertisementBannerUseCase
 import ru.nsu.contact.application.domain.usecase.GetAllContactsUseCase
 import ru.nsu.contact.application.domain.usecase.GetContactsFromContactBookUseCase
 import ru.nsu.contact.application.domain.usecase.UpdateContactUseCase
@@ -22,7 +24,8 @@ class ContactViewModel(
     private val addContactUseCase: AddContactUseCase,
     private val addContactsUseCase: AddContactsUseCase,
     private val getAllContactsUseCase: GetAllContactsUseCase,
-    private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase
+    private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase,
+    private val getAdvertisementBannerUseCase: GetAdvertisementBannerUseCase
 ) : ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>()
@@ -56,6 +59,10 @@ class ContactViewModel(
         }
     }
 
+    fun getBanner(): Banner {
+        return getAdvertisementBannerUseCase.invoke()
+    }
+
     fun updateContact(contact: Contact) {
         viewModelScope.launch(Dispatchers.IO) {
             updateContactUseCase.invoke(contact)
@@ -69,7 +76,8 @@ class ContactViewModel(
         private val addContactUseCase: AddContactUseCase,
         private val addContactsUseCase: AddContactsUseCase,
         private val getAllContactsUseCase: GetAllContactsUseCase,
-        private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase
+        private val getContactsFromContactBookUseCase: GetContactsFromContactBookUseCase,
+        private val getAdvertisementBannerUseCase: GetAdvertisementBannerUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -79,7 +87,8 @@ class ContactViewModel(
                 addContactUseCase,
                 addContactsUseCase,
                 getAllContactsUseCase,
-                getContactsFromContactBookUseCase
+                getContactsFromContactBookUseCase,
+                getAdvertisementBannerUseCase
             ) as T
         }
     }
