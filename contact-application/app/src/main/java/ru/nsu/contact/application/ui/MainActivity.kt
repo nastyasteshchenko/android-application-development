@@ -16,7 +16,7 @@ import com.squareup.seismic.ShakeDetector
 import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.ActivityMainBinding
-import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.presentation.MainViewModel
 import ru.nsu.contact.application.ui.fragment.ContactListFragment
 import javax.inject.Inject
 
@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
+    lateinit var viewModelFactory: MainViewModel.ViewModelFactory
 
-    private val viewModel: ContactViewModel by viewModels { viewModelFactory }
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(
