@@ -48,7 +48,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation("androidx.activity:activity:1.9.2")
     implementation("com.google.android.material:material:1.9.0")
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

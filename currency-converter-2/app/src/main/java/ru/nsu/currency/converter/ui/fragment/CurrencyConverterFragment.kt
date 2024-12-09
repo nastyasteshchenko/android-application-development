@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.nsu.currency.converter.Application
 import ru.nsu.currency.converter.R
 import ru.nsu.currency.converter.databinding.FragmentCurrencyConverterBinding
 import ru.nsu.currency.converter.domain.exception.WrongRubAmountException
 import ru.nsu.currency.converter.domain.model.Currency
-import ru.nsu.currency.converter.presentation.CurrencyViewModel
+import ru.nsu.currency.converter.presentation.CurrencyConverterViewModel
 import ru.nsu.currency.converter.ui.adapter.spinner.CurrencyItemSelectedListener
 import ru.nsu.currency.converter.ui.adapter.spinner.CurrencySpinnerAdapter
 import java.text.DecimalFormat
@@ -25,14 +28,15 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
     companion object {
         private const val SAVED_RUB_AMOUNT_KEY = "saved_rub_amount"
         private const val SAVED_SELECTED_CURRENCY_KEY = "saved_selected_currency"
+        private const val SAVED_SELECTED_POS_CURRENCY_KEY = "saved_selected_pos_currency"
     }
 
     private val formatter = DecimalFormat("#,###.##")
 
     @Inject
-    lateinit var viewModelFactory: CurrencyViewModel.ViewModelFactory
+    lateinit var viewModelFactory: CurrencyConverterViewModel.ViewModelFactory
 
-    private val viewModel: CurrencyViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: CurrencyConverterViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentCurrencyConverterBinding by lazy {
         FragmentCurrencyConverterBinding.inflate(
@@ -53,10 +57,12 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.currencySpinner.adapter = CurrencySpinnerAdapter(
-            this.requireContext(),
-            viewModel.getCurrencies()
-        )
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            binding.currencySpinner.adapter = CurrencySpinnerAdapter(
+                requireContext(),
+                viewModel.getCurrencies()
+            )
+        }
 
         binding.currencySpinner.onItemSelectedListener =
             CurrencyItemSelectedListener { onConvertCurrency(it) }
@@ -65,9 +71,12 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
             val savedRubAmount = oit.getString(SAVED_RUB_AMOUNT_KEY)
             val savedCurrency =
                 oit.getSerializable(SAVED_SELECTED_CURRENCY_KEY, Currency::class.java)
+            val savedCurrencyPos =
+                oit.getSerializable(SAVED_SELECTED_POS_CURRENCY_KEY, Int::class.java)
 
             binding.rubAmount.setText(savedRubAmount)
             savedCurrency?.let { onConvertCurrency(it) }
+            savedCurrencyPos?.let { binding.currencySpinner.setSelection(it) }
         }
 
         binding.rubAmount.addTextChangedListener(object : TextWatcher {
@@ -77,7 +86,9 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                onConvertCurrency(binding.currencySpinner.selectedItem as Currency)
+                if (binding.currencySpinner.selectedItem != null) {
+                    onConvertCurrency(binding.currencySpinner.selectedItem as Currency)
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -118,6 +129,8 @@ class CurrencyConverterFragment @Inject constructor() : Fragment() {
         outState.putString(SAVED_RUB_AMOUNT_KEY, binding.rubAmount.text.toString())
         val selectedCurrency = binding.currencySpinner.selectedItem as? Currency
         outState.putSerializable(SAVED_SELECTED_CURRENCY_KEY, selectedCurrency)
+        val selectedCurrencyPos = binding.currencySpinner.selectedItemPosition
+        outState.putSerializable(SAVED_SELECTED_POS_CURRENCY_KEY, selectedCurrencyPos)
     }
 
     private fun onConvertCurrency(currency: Currency) {

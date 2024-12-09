@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nsu.currency.converter.Application
 import ru.nsu.currency.converter.R
 import ru.nsu.currency.converter.databinding.FragmentCurrencyListBinding
 import ru.nsu.currency.converter.domain.model.Currency
-import ru.nsu.currency.converter.presentation.CurrencyViewModel
+import ru.nsu.currency.converter.presentation.CurrencyListViewModel
 import ru.nsu.currency.converter.ui.adapter.recyclerview.CurrencyRecycleViewAdapter
 import ru.nsu.currency.converter.ui.adapter.recyclerview.SpaceItemDecoration
 import javax.inject.Inject
@@ -25,9 +25,9 @@ class CurrencyListFragment @Inject constructor() : Fragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: CurrencyViewModel.ViewModelFactory
+    lateinit var viewModelFactory: CurrencyListViewModel.ViewModelFactory
 
-    private val viewModel: CurrencyViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: CurrencyListViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentCurrencyListBinding by lazy {
         FragmentCurrencyListBinding.inflate(
