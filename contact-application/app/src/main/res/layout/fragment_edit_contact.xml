@@ -1,0 +1,137 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D6DAC8"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="203dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/edit_contact"
+        android:textAlignment="center"
+        android:textColor="#798784"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="54dp"
+        android:layout_height="31dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/name"
+        android:textColor="#798784"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/nameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactImage"
+        app:layout_constraintVertical_bias="0.923" />
+
+    <TextView
+        android:layout_width="154dp"
+        android:layout_height="31dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/phone_number"
+        android:textColor="#798784"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/contactImage"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.083"
+        app:roundedCornerRadius="8dp" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_text_fields_background"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/name"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textColor="#798784"
+        android:textColorHint="#9CAFAA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactImage"
+        app:layout_constraintVertical_bias="0.172" />
+
+    <EditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/custom_text_fields_background"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:padding="16dp"
+        android:textColor="#798784"
+        android:textColorHint="#9CAFAA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#EFBC9B"
+            android:drawableLeft="@drawable/save"
+            android:text="@string/save"
+            android:textColor="#798784"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#EFBC9B"
+            android:drawableLeft="@drawable/delete"
+            android:text="@string/delete"
+            android:textColor="#798784"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
