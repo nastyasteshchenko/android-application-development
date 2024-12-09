@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.add
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.BuildConfig
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.FragmentContactListBinding
-import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.presentation.ContactListViewModel
 import ru.nsu.contact.application.ui.adapter.SpaceItemDecoration
 import ru.nsu.contact.application.ui.adapter.ContactAdapter
 import ru.nsu.contact.application.ui.mapper.BannerItemMapper
@@ -36,9 +36,9 @@ class ContactListFragment @Inject constructor() : Fragment() {
     lateinit var bannerItemMapper: BannerItemMapper
 
     @Inject
-    lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
+    lateinit var viewModelFactory: ContactListViewModel.ViewModelFactory
 
-    private val viewModel: ContactViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: ContactListViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentContactListBinding by lazy {
         FragmentContactListBinding.inflate(
@@ -78,7 +78,7 @@ class ContactListFragment @Inject constructor() : Fragment() {
             )
         binding.recyclerView.addItemDecoration(spaceDecoration)
 
-        viewModel.contacts.observe(this.requireActivity()) {
+        viewModel.observeLiveData(this.requireActivity()) {
             val newItems = ArrayList(contactItemMapper.contactToContactItem(it))
             if (BuildConfig.IS_FREE) {
                 val banner = bannerItemMapper.bannerToBannerItem(viewModel.getBanner())

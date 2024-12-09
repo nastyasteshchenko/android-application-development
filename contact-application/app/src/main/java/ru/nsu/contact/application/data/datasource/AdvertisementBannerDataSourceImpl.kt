@@ -15,7 +15,7 @@ class AdvertisementBannerDataSourceImpl @Inject constructor() : AdvertisementBan
 
     override fun getBanner(): BannerEntity {
         return BannerEntity(
-            id++,
+            id,
             BANNER_CATEGORY,
             BANNER_TITLE,
             BANNER_DESCRIPTION,

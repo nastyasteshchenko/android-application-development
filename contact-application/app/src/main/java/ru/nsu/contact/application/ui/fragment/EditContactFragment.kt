@@ -16,14 +16,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import ru.nsu.contact.application.Application
 import ru.nsu.contact.application.R
 import ru.nsu.contact.application.databinding.FragmentEditContactBinding
 import ru.nsu.contact.application.domain.model.Contact
-import ru.nsu.contact.application.presentation.ContactViewModel
+import ru.nsu.contact.application.presentation.EditContactViewModel
 import ru.nsu.contact.application.ui.copyImageToAppDirectory
 import javax.inject.Inject
 
@@ -35,9 +35,9 @@ class EditContactFragment @Inject constructor() : Fragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: ContactViewModel.ViewModelFactory
+    lateinit var viewModelFactory: EditContactViewModel.ViewModelFactory
 
-    private val viewModel: ContactViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: EditContactViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentEditContactBinding by lazy {
         FragmentEditContactBinding.inflate(
