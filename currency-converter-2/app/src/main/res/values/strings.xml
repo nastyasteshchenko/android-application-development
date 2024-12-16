@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Currency converter</string>
+    <string name="currency_name_with_charcode">%1$s (%2$s)</string>
+    <string name="nominal">Единиц: %1$d</string>
+    <string name="value">Курс: %1$.4f RUB</string>
+    <string name="previous_value">Прошлый курс: %1$.4f RUB</string>
+    <string name="enter_amount_in_rub">Введите количество рублей</string>
+    <string name="conversion_result_text">Результат конвертации:</string>
+    <string name="conversion_result_template">%1$s %2$s</string>
+    <string name="currency_list">Список валют</string>
+    <string name="converter">Ковертер</string>
+    <string name="refresh">Обновить</string>
+    <string name="rub_amount">Количество рублей (RUB):</string>
+</resources>

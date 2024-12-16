@@ -1,0 +1,70 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8EDE3"
+    android:fillViewport="true"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F8EDE3"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/rub_amount"
+            android:textColor="#85586F"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/rubAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_text_fields_background"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/enter_amount_in_rub"
+            android:textColorHint="#BCB1A4"
+            android:inputType="numberDecimal"
+            android:padding="16dp"
+            android:textColor="#85586F" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/conversion_result_text"
+            android:textColor="#85586F"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/conversionResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_text_fields_background"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/conversion_result_template"
+            android:padding="16dp"
+            android:textColor="#85586F"
+            android:textColorHint="#85586F"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/currencySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:padding="5dp"
+            android:popupBackground="@drawable/rounded_background" />
+
+    </LinearLayout>
+</ScrollView>
